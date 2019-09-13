@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
+  <!-- how to hack google forms/sheets: https://www.youtube.com/watch?v=cOgUder1B6k -->
+  <!-- blog how to on google sheets api: https://blog.usejournal.com/how-to-use-google-sheets-as-a-cms-or-a-database-f9d8e736fdce -->
   <head>
     <script src="http://cdn.jsdelivr.net/vue/2.0.3/vue.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></script>
+    <link  rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></script>
   </head>
   <body>
     <div id="app">
-      <p>{{ message }}</p>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">{{ message }}</p>
+            </div>
+          </div>
+      
     </div>
     <script src="main.js"></script>
     
