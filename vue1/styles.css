@@ -1,0 +1,27 @@
+
+
+body {
+    margin: 0 20%;
+}
+
+.f-card {
+    width: 36rem;
+    margin: 10px;
+    min-height: 140px;
+}
+
+.card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+pre {
+    font-family: monospace;
+    background-color: #444;
+    color: #44c87f;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 3px;
+}

@@ -4,18 +4,34 @@
   <!-- blog how to on google sheets api: https://blog.usejournal.com/how-to-use-google-sheets-as-a-cms-or-a-database-f9d8e736fdce -->
   <head>
     <script src="http://cdn.jsdelivr.net/vue/2.0.3/vue.js"></script>
-    <link  rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
     <div id="app">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">{{ message }}</p>
-            </div>
+      <div v-for="f-card in cards">
+        <div v-on:click="fCard.revealed = !fCard.revealed" class="card fCard">
+          <div class="card-body card-content">
+            <p v-if="!fCard.revealed"><b>{{ fCard.prompt }}</b></p>
+            <p v-else class="card-text" v-html="fCard.answer"><p>
           </div>
-      
+        </div>
+      </div>
     </div>
+
+    <div class="card f-card">
+      <div class="card-body card-content">
+        <button v-if="!showNewCard" v-on:click="showNewCardForm = true" class="btn btn-default">
+          <i class="fa fa-2x fa-plus-circle"></i>
+        </button>
+        <form v-else>
+          
+        </form>
+      </div>
+    </div>
+
+
     <script src="main.js"></script>
     
   </body>
