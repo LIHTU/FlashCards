@@ -10,7 +10,7 @@
   </head>
   <body>
     <div id="app">
-      <div v-for="f-card in cards">
+      <div v-for="fCard in cards">
         <div v-on:click="fCard.revealed = !fCard.revealed" class="card fCard">
           <div class="card-body card-content">
             <p v-if="!fCard.revealed"><b>{{ fCard.prompt }}</b></p>
