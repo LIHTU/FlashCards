@@ -1,0 +1,38 @@
+/* css vars */
+:root {
+    --seaGreen: #44c87f;
+}
+
+body {
+    margin: 0 20%;
+}
+
+.f-card {
+    width: 36rem;
+    margin: 10px;
+    min-height: 140px;
+    box-shadow: 2px 2px 3px #ccc;
+    transition: all .5;
+}
+
+.card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+div[contenteditable]{
+    max-height: 300px;
+    overflow: auto;
+}
+
+pre {
+    font-family: monospace;
+    background-color: #444;
+    color: var(--seaGreen);
+    margin: 10px;
+    padding: 5px;
+    border-radius: 3px;
+    text-align: left;
+}
