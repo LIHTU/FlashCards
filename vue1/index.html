@@ -5,32 +5,56 @@
   <head>
     <script src="http://cdn.jsdelivr.net/vue/2.0.3/vue.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
+
+
     <div id="app">
       <div v-for="fCard in cards">
-        <div v-on:click="fCard.revealed = !fCard.revealed" class="card fCard">
+        <div v-on:click="fCard.revealed = !fCard.revealed" class="card f-card">
           <div class="card-body card-content">
             <p v-if="!fCard.revealed"><b>{{ fCard.prompt }}</b></p>
             <p v-else class="card-text" v-html="fCard.answer"><p>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="card f-card">
-      <div class="card-body card-content">
-        <button v-if="!showNewCard" v-on:click="showNewCardForm = true" class="btn btn-default">
-          <i class="fa fa-2x fa-plus-circle"></i>
-        </button>
-        <form v-else>
-          
-        </form>
+      <button v-if="!showNewCardForm" v-on:click="showNewCardForm = true" class="btn btn-default" style="margin: 0 auto; width: 100%;">
+        <i class="fa fa-2x fa-plus-circle"></i>
+      </button><br/>
+      <div v-show="showNewCardForm" class="card f-card">
+        <div class="card-body card-content">
+          <form>
+            <div class="form-group">
+              <div class="label">Prompt:</div>
+              <textarea class="form-control" rows=2 cols=60></textarea>
+            </div>
+            <div class="form-group">
+              <div class="label">Answer:</div>
+              <textarea class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+              <div class="label">Tags:</div>
+              <input type="text" class="form-control">
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    
+      <button v-on:click="toggleCarrot()">Toggle Carrot</button>
+      <div v-show="showCarrot" style="position: sticky; top:0; left: 20px">Carrot<i class="fa fa-carrot fa-3x"></i></div>
+      <div v-show="!showCarrot">Don't show carrot.</div>
+      <div>showCarrot var val: {{showCarrot}}</div>
+    </div><!-- end vue app -->
 
+    <!-- Warning: NOT IN APP!!! -->
+    <div style="position: absolute; font-family: monospace; font-size: 4rem; height: 40px;">
+      <div style="position: relative; top: 0; left: 0;">1-------</div>
+      <div style="position: absolute; top: 0; left: 0;">_2______</div>
+      <div style="position: absolute; top: 0; left: 0;">||3|||||</div>
+    </div>
 
     <script src="main.js"></script>
     

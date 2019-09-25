@@ -1,4 +1,4 @@
-new Vue({
+var app = new Vue({
     el: '#app',
     data: {
       message: 'Hello Vue.js!',
@@ -25,11 +25,56 @@ new Vue({
           tags: "javascript, front-end architecture, robin",
           revealed: false
         }
+        ,{
+          prompt: "What is hoisting in javascript?",
+          answer: "Hoisting allows the declaration of a variable after it's definition\n"
+          + "<pre>x = 5;\nvar x;</pre>\n"
+          + "variables defined with let and const cannot be hoisted."
+          ,
+          tags: "javascript",
+          revealed: false
+        }
+        ,{
+          prompt: "What is the use of <b>let</b> in js?",
+          answer: "It declares a block level variable that is not added to the global window object." 
+          +"<b>var</b> on the otherhand is function level and is available outside the block it was defined in within that blocks function."
+          +"\nUseful if you need a tightly scoped variable or func.  Also good for declarations in for and while loops.",
+          tags: "javascript",
+          revealed: false
+        }
+        ,{
+          prompt: "How would you define and use a css variable (native)",
+          answer: "define\n<pre>:root {\n\t--seaGreen: #44c87f;\n}</pre>\n\n"
+          + "use:\n<pre>"
+          + "div {\n\tcolor: var(--seaGreen);\n}"
+          + "</pre>",
+          tags: "",
+          revealed: false
+        }
         // ,{
         //   prompt: "",
         //   answer: "",
-        //   tags: ""
+        //   tags: "",
+        //   revealed: false
         // }
-      ]
+      ],
+      showNewCardForm: false,
+      showCarrot: false,
+      toggleCarrot: function(){
+        console.log('this.showCarrot', this.showCarrot);
+        this.showCarrot = !this.showCarrot;
+      },
+      f: function (){
+        var x = 1;
+        {
+          let x = 2;
+          console.log("letted x", x);
+          var y = 3;
+        }
+        console.log('y', y)
+        return x;
+      }
     }
   })
+
+
