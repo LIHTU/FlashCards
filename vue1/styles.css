@@ -3,12 +3,12 @@
     --seaGreen: #44c87f;
 }
 
-body {
-    margin: 0 20%;
+.container {
+    margin: 0 15%;
 }
 
 .f-card {
-    width: 36rem;
+    width: 22rem;
     margin: 10px;
     min-height: 140px;
     box-shadow: 2px 2px 3px #ccc;
@@ -35,4 +35,8 @@ pre {
     padding: 5px;
     border-radius: 3px;
     text-align: left;
+}
+
+.prompt {
+    font-weight: bold;
 }

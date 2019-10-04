@@ -15,35 +15,46 @@
 
 
     <div id="app">
-      <div v-for="fCard in cards">
-        <div v-on:click="fCard.revealed = !fCard.revealed" class="card f-card">
-          <div class="card-body card-content">
-            <p v-if="!fCard.revealed"><b>{{ fCard.prompt }}</b></p>
-            <p v-else class="card-text" v-html="fCard.answer"><p>
+      <div class="container">
+        <div class="row">
+          <div v-for="fCard in cards" class="col-xs-12 col-md-4">
+            <div v-on:click="fCard.revealed = !fCard.revealed" class="card f-card">
+              <div class="card-body card-content">
+                <p v-if="!fCard.revealed" v-html="fCard.prompt" class="prompt"></p>
+                <p v-else class="card-text" v-html="fCard.answer"><p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-4">
+            <div class="card f-card">
+              <div class="card-body card-content">
+                <button v-if="!showNewCardForm" v-on:click="showNewCardForm = true" class="btn btn-default card-content">
+                  <i class="fa fa-2x fa-plus-circle"></i>
+                </button>
+              </div>
+              <div v-show="showNewCardForm" class="card-body card-content">
+                <form>
+                  <div class="form-group">
+                    <div class="label">Prompt:</div>
+                    <textarea class="form-control" rows=2 cols=60></textarea>
+                  </div>
+                  <div class="form-group">
+                    <div class="label">Answer:</div>
+                    <textarea class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <div class="label">Tags (Comma Separated):</div>
+                    <input type="text" class="form-control">
+                  </div>
+                </form>
+              </div>
+            </div>
+            
           </div>
         </div>
-      </div>
 
-      <button v-if="!showNewCardForm" v-on:click="showNewCardForm = true" class="btn btn-default" style="margin: 0 auto; width: 100%;">
-        <i class="fa fa-2x fa-plus-circle"></i>
-      </button><br/>
-      <div v-show="showNewCardForm" class="card f-card">
-        <div class="card-body card-content">
-          <form>
-            <div class="form-group">
-              <div class="label">Prompt:</div>
-              <textarea class="form-control" rows=2 cols=60></textarea>
-            </div>
-            <div class="form-group">
-              <div class="label">Answer:</div>
-              <textarea class="form-control"></textarea>
-            </div>
-            <div class="form-group">
-              <div class="label">Tags:</div>
-              <input type="text" class="form-control">
-            </div>
-          </form>
-        </div>
+  
+        
       </div>
     </div><!-- end vue app -->
 
