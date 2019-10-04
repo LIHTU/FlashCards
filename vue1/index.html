@@ -6,6 +6,7 @@
   <!-- docs on managing account keys, i.e. Flash Cards-90cc....json https://cloud.google.com/iam/docs/understanding-service-accounts?hl=en_US#managing_service_account_keys-->
 
   <head>
+    <title>Flash Cards</title>
     <script src="http://cdn.jsdelivr.net/vue/2.0.3/vue.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
@@ -17,16 +18,16 @@
     <main id="app">
       <div class="container">
         <div class="row">
-          <section v-for="fCard in cards" class="col-xs-12 col-md-4">
+          <section v-for="fCard in cards" class="col-xs-12 col-md-6">
             <div v-on:click="fCard.revealed = !fCard.revealed" class="card f-card">
               <div class="card-body card-content">
                 <p v-if="!fCard.revealed" v-html="fCard.prompt" class="prompt"></p>
-                <p v-else class="card-text" v-html="fCard.answer"><p>
+                <p v-else v-html="fCard.answer"><p>
               </div>
             </div>
           </section>
           
-          <section class="col-xs-12 col-md-4">
+          <section class="col-xs-12 col-md-6">
             <div class="card f-card">
               <div class="card-body card-content">
                 <button v-if="!showNewCardForm" v-on:click="showNewCardForm = true" class="btn btn-default card-content">
@@ -51,7 +52,7 @@
               </div>
             </div>
           </section>
-          
+
         </div>
       </div>
     </main><!-- end vue app -->

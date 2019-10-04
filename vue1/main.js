@@ -1,3 +1,5 @@
+"use strict";
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -63,12 +65,12 @@ var app = new Vue({
           tags: "html",
           revealed: false
         }
-        // ,{
-        //   prompt: "",
-        //   answer: "",
-        //   tags: "",
-        //   revealed: false
-        // }
+        ,{
+          prompt: "How would you title a web page?",
+          answer: "Use the title tag",
+          tags: "",
+          revealed: false
+        }
         // ,{
         //   prompt: "",
         //   answer: "",
