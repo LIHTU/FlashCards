@@ -48,9 +48,45 @@ var app = new Vue({
           + "use:\n<pre>"
           + "div {\n\tcolor: var(--seaGreen);\n}"
           + "</pre>",
-          tags: "",
+          tags: "css",
           revealed: false
         }
+        ,{
+          prompt: "What is a Google Cloud Platform Managed Zone?",
+          answer: "A managed zone is the container for all of your DNS records that share the same domain name, for example, example.com",
+          tags: "web hosting",
+          revealed: false
+        }
+        ,{
+          prompt: "How would you make an a tag open in a new tab or window?",
+          answer: "<pre>target='_blank'</pre>\nLink will open in a new tab or window depending on browser settings.",
+          tags: "html",
+          revealed: false
+        }
+        // ,{
+        //   prompt: "",
+        //   answer: "",
+        //   tags: "",
+        //   revealed: false
+        // }
+        // ,{
+        //   prompt: "",
+        //   answer: "",
+        //   tags: "",
+        //   revealed: false
+        // }
+        // ,{
+        //   prompt: "",
+        //   answer: "",
+        //   tags: "",
+        //   revealed: false
+        // }
+        // ,{
+        //   prompt: "",
+        //   answer: "",
+        //   tags: "",
+        //   revealed: false
+        // }
         // ,{
         //   prompt: "",
         //   answer: "",
