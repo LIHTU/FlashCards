@@ -14,18 +14,19 @@
   <body>
 
 
-    <div id="app">
+    <main id="app">
       <div class="container">
         <div class="row">
-          <div v-for="fCard in cards" class="col-xs-12 col-md-4">
+          <section v-for="fCard in cards" class="col-xs-12 col-md-4">
             <div v-on:click="fCard.revealed = !fCard.revealed" class="card f-card">
               <div class="card-body card-content">
                 <p v-if="!fCard.revealed" v-html="fCard.prompt" class="prompt"></p>
                 <p v-else class="card-text" v-html="fCard.answer"><p>
               </div>
             </div>
-          </div>
-          <div class="col-xs-12 col-md-4">
+          </section>
+          
+          <section class="col-xs-12 col-md-4">
             <div class="card f-card">
               <div class="card-body card-content">
                 <button v-if="!showNewCardForm" v-on:click="showNewCardForm = true" class="btn btn-default card-content">
@@ -49,14 +50,11 @@
                 </form>
               </div>
             </div>
-            
-          </div>
+          </section>
+          
         </div>
-
-  
-        
       </div>
-    </div><!-- end vue app -->
+    </main><!-- end vue app -->
 
     <!-- Warning: html below NOT IN APP!!! -->
 
