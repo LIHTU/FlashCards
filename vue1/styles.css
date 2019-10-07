@@ -1,6 +1,8 @@
 /* css vars */
 :root {
     --seaGreen: #44c87f;
+    --appleRed: #c52607;
+    --appleWhite: #fff8e6;
 }
 
 .container {
@@ -25,6 +27,14 @@
 div[contenteditable]{
     max-height: 300px;
     overflow: auto;
+}
+
+.red-prompt {
+    background-color: var(--appleRed);
+    color: var(--appleWhite);
+}
+.apple-answer {
+    background-color: var(--appleWhite);
 }
 
 pre {
