@@ -71,12 +71,12 @@ var app = new Vue({
           tags: "",
           revealed: false
         }
-        // ,{
-        //   prompt: "",
-        //   answer: "",
-        //   tags: "",
-        //   revealed: false
-        // }
+        ,{
+          prompt: "What is domain privacy",
+          answer: "I means your hosting provider uses their own contact info in your whois entry that is required by ICANN",
+          tags: "hosting",
+          revealed: false
+        }
         // ,{
         //   prompt: "",
         //   answer: "",
