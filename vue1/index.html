@@ -19,10 +19,12 @@
       <div class="container">
         <div class="row">
           <section v-for="fCard in cards" class="col-xs-12 col-md-6">
-            <div v-on:click="fCard.revealed = !fCard.revealed" class="card f-card">
+            <div v-on:click="fCard.revealed = !fCard.revealed" 
+              v-bind:class="{'red-prompt': !fCard.revealed, 'apple-answer':fCard.revealed}" 
+              class="card f-card">
               <div class="card-body card-content">
                 <p v-if="!fCard.revealed" v-html="fCard.prompt" class="prompt"></p>
-                <p v-else v-html="fCard.answer"><p>
+                <p v-else class="answer" v-html="fCard.answer"><p>
               </div>
             </div>
           </section>
