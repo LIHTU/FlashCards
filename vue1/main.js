@@ -72,23 +72,23 @@ var app = new Vue({
           revealed: false
         }
         ,{
-          prompt: "What is domain privacy",
+          prompt: "What is domain privacy?",
           answer: "I means your hosting provider uses their own contact info in your whois entry that is required by ICANN",
           tags: "hosting",
           revealed: false
         }
-        // ,{
-        //   prompt: "",
-        //   answer: "",
-        //   tags: "",
-        //   revealed: false
-        // }
-        // ,{
-        //   prompt: "",
-        //   answer: "",
-        //   tags: "",
-        //   revealed: false
-        // }
+        ,{
+          prompt: "What is a kernal?",
+          answer: "The kernel is a computer program that is the core of a computer's operating system, with complete control over everything in the system.[1] On most systems, it is one of the first programs loaded on start-up (after the bootloader). It handles the rest of start-up as well as input/output requests from software, translating them into data-processing instructions for the central processing unit. It handles memory and peripherals like keyboards, monitors, printers, and speakers.",
+          tags: "computer science",
+          revealed: false
+        }
+        ,{
+          prompt: "What is clickjacking?",
+          answer: "Clickjacking, also known as a \"UI redress attack\", is when an attacker uses multiple transparent or opaque layers to trick a user into clicking on a button or link on another page when they were intending to click on the the top level page. Thus, the attacker is "hijacking" clicks meant for their page and routing them to another page.",
+          tags: "cyber security",
+          revealed: false
+        }
         // ,{
         //   prompt: "",
         //   answer: "",
