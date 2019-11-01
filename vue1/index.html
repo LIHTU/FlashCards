@@ -1,67 +1,112 @@
 <!DOCTYPE html>
 <html>
-  <!-- how to hack google forms/sheets: https://www.youtube.com/watch?v=cOgUder1B6k -->
-  <!-- blog how to on google sheets api: https://blog.usejournal.com/how-to-use-google-sheets-as-a-cms-or-a-database-f9d8e736fdce -->
-  <!-- google sheets api: https://console.cloud.google.com/apis/api/sheets.googleapis.com/overview?project=animated-codex-140623&folder&organizationId -->
-  <!-- docs on managing account keys, i.e. Flash Cards-90cc....json https://cloud.google.com/iam/docs/understanding-service-accounts?hl=en_US#managing_service_account_keys-->
+<!-- how to hack google forms/sheets: https://www.youtube.com/watch?v=cOgUder1B6k -->
+<!-- blog how to on google sheets api: https://blog.usejournal.com/how-to-use-google-sheets-as-a-cms-or-a-database-f9d8e736fdce -->
+<!-- google sheets api: https://console.cloud.google.com/apis/api/sheets.googleapis.com/overview?project=animated-codex-140623&folder&organizationId -->
+<!-- docs on managing account keys, i.e. Flash Cards-90cc....json https://cloud.google.com/iam/docs/understanding-service-accounts?hl=en_US#managing_service_account_keys-->
 
-  <head>
-    <title>Flash Cards</title>
-    <script src="http://cdn.jsdelivr.net/vue/2.0.3/vue.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
-    <link rel="stylesheet" href="./styles.css">
-  </head>
-  <body>
+<head>
+  <title>Flash Cards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="http://cdn.jsdelivr.net/vue/2.0.3/vue.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="C:\code\vueApps\vue1\css\startbootstrap-freelancer\css\freelancer.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
 
 
-    <main id="app">
-      <div class="container">
-        <div class="row">
-          <section v-for="fCard in cards" class="col-xs-12 col-md-6">
-            <div v-on:click="fCard.revealed = !fCard.revealed" 
-              v-bind:class="{'red-prompt': !fCard.revealed, 'apple-answer':fCard.revealed}" 
-              class="card f-card">
-              <div class="card-body card-content">
-                <p v-if="!fCard.revealed" v-html="fCard.prompt" class="prompt"></p>
-                <p v-else class="answer" v-html="fCard.answer"><p>
-              </div>
+  <main id="app">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">Card Tree</a>
+      <button class="navbar-toggler pull-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"><span class="sr-only">Cards</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#"><span class="sr-only">Manage Sets</span></a>
+          </li>
+        </ul>
+      </div>
+      <div class="btn-group" role="group" aria-label="view mode">
+        <button v-on:click="setView('grid')" type="button" class="btn btn-secondary"><i class="fa fa-th-large"></i></button>
+        <button v-on:click="setView('single')" type="button" class="btn btn-secondary"><i class="fa fa-square"></i></button>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <!-- <div class="col-xs-12 col-md-6" style="background-color: teal; width: 100%; height: 100px;"></div>
+          <div class="col-xs-12 col-md-6" style="background-color: yellow; width: 100%; height: 100px;"></div> -->
+
+      </div>
+      <div v-if="view=='grid'" class="row">
+        <section v-for="fCard in cards" class="col-sm-12 col-md-6">
+          <div v-on:click="fCard.revealed = !fCard.revealed"
+            v-bind:class="{'red-prompt': !fCard.revealed, 'apple-answer':fCard.revealed}" class="card f-card">
+            <div class="card-body card-content">
+              <p v-if="!fCard.revealed" v-html="fCard.prompt" class="prompt"></p>
+              <p v-else class="answer" v-html="fCard.answer">
+                <p>
             </div>
-          </section>
-          
-          <section class="col-xs-12 col-md-6">
-            <div class="card f-card">
-              <div class="card-body card-content">
-                <button v-if="!showNewCardForm" v-on:click="showNewCardForm = true" class="btn btn-default card-content">
-                  <i class="fa fa-2x fa-plus-circle"></i>
-                </button>
-              </div>
-              <div v-show="showNewCardForm" class="card-body card-content">
-                <form>
-                  <div class="form-group">
-                    <div class="label">Prompt:</div>
-                    <textarea class="form-control" rows=2 cols=60></textarea>
-                  </div>
-                  <div class="form-group">
-                    <div class="label">Answer:</div>
-                    <textarea class="form-control"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <div class="label">Tags (Comma Separated):</div>
-                    <input type="text" class="form-control">
-                  </div>
-                </form>
-              </div>
-            </div>
-          </section>
+          </div>
+        </section>
 
+        <section class="col-xs-12 col-md-6">
+          <div class="card f-card">
+            <div class="card-body card-content">
+              <button v-if="!showNewCardForm" v-on:click="showNewCardForm = true" class="btn btn-default card-content">
+                <i class="fa fa-2x fa-plus-circle"></i>
+              </button>
+            </div>
+            <div v-show="showNewCardForm" class="card-body card-content">
+              <form>
+                <div class="form-group">
+                  <div class="label">Prompt:</div>
+                  <textarea class="form-control" rows=2 cols=60></textarea>
+                </div>
+                <div class="form-group">
+                  <div class="label">Answer:</div>
+                  <textarea class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <div class="label">Tags (Comma Separated):</div>
+                  <input type="text" class="form-control">
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <div v-if="view=='single'">
+        <!-- todo: put card in directive or some re-usable html as view does it. -->
+        <div v-on:click="currentCard.revealed = !currentCard.revealed"
+          v-bind:class="{'red-prompt': !currentCard.revealed, 'apple-answer':currentCard.revealed}" class="card f-card">
+          <div class="card-body card-content">
+            <p v-if="!currentCard.revealed" v-html="currentCard.prompt" class="prompt"></p>
+            <p v-else class="answer" v-html="currentCard.answer">
+              <p>
+          </div>
         </div>
       </div>
-    </main><!-- end vue app -->
 
-    <!-- Warning: html below NOT IN APP!!! -->
+    </div>
+  </main><!-- end vue app -->
 
-    <script src="main.js"></script>
-    
-  </body>
+  <!-- Warning: html below NOT IN APP!!! -->
+
+  <script src="main.js"></script>
+
+</body>
+
 </html>

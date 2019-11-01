@@ -10,7 +10,7 @@
 }
 
 .f-card {
-    width: 22rem;
+    /* width: 22rem; */
     margin: 10px;
     min-height: 140px;
     box-shadow: 2px 2px 3px #ccc;
@@ -22,11 +22,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-}
-
-div[contenteditable]{
-    max-height: 300px;
-    overflow: auto;
 }
 
 .red-prompt {
@@ -49,4 +44,13 @@ pre {
 
 .prompt {
     font-weight: bold;
+}
+
+.button-container {
+    justify-content: space-evenly;
+}
+
+.bg-light-blue {
+    display: flex;
+    background-color: #00adff;
 }

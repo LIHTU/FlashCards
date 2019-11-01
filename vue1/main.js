@@ -84,18 +84,83 @@ var app = new Vue({
           revealed: false
         }
         ,{
-          prompt: "What is clickjacking?",
-          answer: "Clickjacking, also known as a \"UI redress attack\", is when an attacker uses multiple transparent or opaque layers to trick a user into clicking on a button or link on another page when they were intending to click on the the top level page. Thus, the attacker is "hijacking" clicks meant for their page and routing them to another page.",
-          tags: "cyber security",
+          prompt: "What is domain privacy?",
+          answer: "I means your hosting provider uses their own contact info in your whois entry that is required by ICANN",
+          tags: "hosting",
           revealed: false
         }
-        // ,{
+        ,{
+          prompt: "What is a kernal?",
+          answer: "The kernel is a computer program that is the core of a computer's operating system, with complete control over everything in the system.[1] On most systems, it is one of the first programs loaded on start-up (after the bootloader). It handles the rest of start-up as well as input/output requests from software, translating them into data-processing instructions for the central processing unit. It handles memory and peripherals like keyboards, monitors, printers, and speakers.",
+          tags: "computer science",
+          revealed: false
+        }
+        ,{
+          prompt: "What is the http response header cache-control: 'no-cache' used for?",
+          answer: "Misleading.  It instructs the browser to cache the file! But it also instructs the browser to verify the etag with the server.  This cache-control method is used frequently.\n" +
+          "'no-store' on the other hand tells the browser not to cache the file.",
+          tags: "http",
+          revealed: false
+      }
+      ,{
+          prompt: "In a nutshell, what are user authentication and authorization? How are they different?",
+          answer: "Authentication deals with the matter of <b>who</b> the user is. Authorization handles matters of <b>What<b>",
+          tags: "web security",
+          revealed: false
+      }
+      ,{
+          prompt: "What is cross site scripting attack?",
+          answer: "it's this <script>alert('Youre being attacked!');console.log('attack!');</script>"
+          +"<script>console.log('hi');</script>",
+          tags: "web security",
+          revealed: false
+      }
+      ,{
+        prompt: "How would you prevent a view model object from continuing to be updated, say, by a change in one of it's dependencies?",
+        answer: "object.freeze()",
+        tags: "vue",
+        revealed: false
+      }
+      ,{
+        prompt: "What are some steps of a vue instance initialization?",
+        answer: "1. set up data observation\n2.compile the template \n3. mount the instance to the DOM \n4.update the DOM when data changes",
+        tags: "vue",
+        revealed: false
+      }
+      // ,{
         //   prompt: "",
         //   answer: "",
         //   tags: "",
         //   revealed: false
-        // }
+      // }
+      // ,{
+        //   prompt: "",
+        //   answer: "",
+        //   tags: "",
+        //   revealed: false
+      // }
+      // ,{
+        //   prompt: "",
+        //   answer: "",
+        //   tags: "",
+        //   revealed: false
+      // }
+      // ,{
+>>>>>>> added some boiler plate for bootstrap so that it works well on mobile
+        //   prompt: "",
+        //   answer: "",
+        //   tags: "",
+        //   revealed: false
+      // }
+      // ,{
+        //   prompt: "",
+        //   answer: "",
+        //   tags: "",
+        //   revealed: false
+      // }
+      
       ],
+      currentCardIndex: 0,
       showNewCardForm: false,
       showCarrot: false,
       toggleCarrot: function(){
@@ -111,6 +176,21 @@ var app = new Vue({
         }
         console.log('y', y)
         return x;
+      },
+      setView: function(newView){
+        return 'newView';
+      }
+    },
+    computed: {
+      currentCard: function(){
+        return this.cards[this.currentCardIndex];
+      }
+    },
+    methods: {
+      setView: function(newView) {
+        console.log('newView', newView);
+        this.view = newView;
+        return newView;
       }
     }
   })
