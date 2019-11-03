@@ -130,12 +130,12 @@ var app = new Vue({
           tags: "vue",
           revealed: false
         }
-        // ,{
-          //   prompt: "",
-          //   answer: "",
-          //   tags: "",
-          //   revealed: false
-        // }
+        ,{
+          prompt: "What's the diff between <i>await Html.PartialAsync(_view) and <i>@RenderPartial</i>?",
+          answer: "...",
+          tags: "asp.net",
+          revealed: false
+        }
         // ,{
           //   prompt: "",
           //   answer: "",
