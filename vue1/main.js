@@ -136,18 +136,18 @@ var app = new Vue({
           tags: "asp.net",
           revealed: false
         }
-        // ,{
-          //   prompt: "",
-          //   answer: "",
-          //   tags: "",
-          //   revealed: false
-        // }
-        // ,{
-          //   prompt: "",
-          //   answer: "",
-          //   tags: "",
-          //   revealed: false
-        // }
+        ,{
+          prompt: "Describe the function of align-items in flexbox",
+          answer: "It's a class applied to a container that aligns clidren vertically along the 'cross axis'.",
+          tags: "flexbox",
+          revealed: false
+        }
+        ,{
+            prompt: "What are the advantages of a single page application?",
+            answer: "",
+            tags: "",
+            revealed: false
+        }
         // ,{
           //   prompt: "",
           //   answer: "",
