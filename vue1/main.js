@@ -130,24 +130,24 @@ var app = new Vue({
           tags: "vue",
           revealed: false
         }
-        // ,{
-          //   prompt: "",
-          //   answer: "",
-          //   tags: "",
-          //   revealed: false
-        // }
-        // ,{
-          //   prompt: "",
-          //   answer: "",
-          //   tags: "",
-          //   revealed: false
-        // }
-        // ,{
-          //   prompt: "",
-          //   answer: "",
-          //   tags: "",
-          //   revealed: false
-        // }
+        ,{
+          prompt: "What's the diff between <i>await Html.PartialAsync(_view) and <i>@RenderPartial</i>?",
+          answer: "...",
+          tags: "asp.net",
+          revealed: false
+        }
+        ,{
+          prompt: "Describe the function of align-items in flexbox",
+          answer: "It's a class applied to a container that aligns clidren vertically along the 'cross axis'.",
+          tags: "flexbox",
+          revealed: false
+        }
+        ,{
+            prompt: "What are the advantages of a single page application?",
+            answer: "",
+            tags: "",
+            revealed: false
+        }
         // ,{
           //   prompt: "",
           //   answer: "",
