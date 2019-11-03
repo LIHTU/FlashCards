@@ -9,6 +9,12 @@
     margin: 0 15%;
 }
 
+.display-toggler {
+    position: absolute;
+    top: 65px;
+    right: 10px;
+}
+
 .f-card {
     /* width: 22rem; */
     margin: 10px;
@@ -54,3 +60,5 @@ pre {
     display: flex;
     background-color: #00adff;
 }
+
+
