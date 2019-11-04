@@ -5,8 +5,11 @@
     --appleWhite: #fff8e6;
 }
 
-.container {
-    margin: 0 15%;
+.first-container {
+    margin: 65px 15px;
+}
+.second-container {
+    margin: 0 auto;
 }
 
 .display-toggler {
@@ -17,8 +20,9 @@
 
 .f-card {
     /* width: 22rem; */
-    margin: 10px;
+    margin: 10px auto;
     min-height: 140px;
+    max-width: 586px;
     box-shadow: 2px 2px 3px #ccc;
     transition: all .5;
 }
@@ -61,4 +65,28 @@ pre {
     background-color: #00adff;
 }
 
+/* Media Queries */
+/* smallest devices */
+@media (max-width: 575px) {
 
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
+}
