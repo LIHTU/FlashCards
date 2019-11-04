@@ -26,6 +26,10 @@
     box-shadow: 2px 2px 3px #ccc;
     transition: all .5;
 }
+.nextPrevRow {
+    margin: 10px auto;
+    max-width: 586px;
+}
 
 .card-content {
     display: flex;

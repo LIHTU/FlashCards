@@ -45,11 +45,15 @@
       <div class="second-container">
         <!-- <span class="float-left">{{cards.length}}</span> -->
         <div class="display-toggler">
-          <button v-show="view=='single'" v-on:click="setView('grid')" type="button" class="btn btn-secondary"><i
-              class="fa fa-th-large"></i></button>
-          <button v-show="view=='grid'" v-on:click="setView('single')" type="button" class="btn btn-secondary"><i
-              class="fa fa-square"></i></button>
+          <!-- todo: add a shuffle button -->
+          <button v-show="view=='single'" v-on:click="setView('grid')" type="button" class="btn btn-secondary">
+            <i class="fa fa-th-large"></i>
+          </button>
+          <button v-show="view=='grid'" v-on:click="setView('single')" type="button" class="btn btn-secondary">
+            <i class="fa fa-square"></i>
+          </button>
         </div>
+        
         <div v-if="view=='grid'" class="row">
           <section v-for="fCard in cards" class="col-sm-12 col-md-6">
             <div v-on:click="fCard.revealed = !fCard.revealed"
@@ -100,6 +104,10 @@
               <p v-else class="answer" v-html="currentCard.answer"></p>
             </div>
           </div>
+        </div>
+        <div class="nextPrevRow">
+          <button @click="prevCard()" class="btn btn-secondary">Prev</button>
+          <button @click="nextCard()" class="btn btn-secondary float-right">Next</button>
         </div>
       </div>
   </main><!-- end vue app -->

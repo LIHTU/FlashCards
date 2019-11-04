@@ -193,6 +193,24 @@ var app = new Vue({
         console.log('newView', newView);
         this.view = newView;
         return newView;
+      },
+      nextCard: function() {
+        // handle going to begining of array from end.
+        if(this.currentCardIndex == this.cards.length-1){
+          this.currentCardIndex = 0;
+        } else {
+          this.currentCardIndex++;
+        }
+        this.currentCard = this.cards[this.currentCardIndex];
+      },
+      prevCard: function() {
+        // handle going to begining of array from end.
+        if(this.currentCardIndex == 0){
+          this.currentCardIndex = this.cards.length-1;
+        } else {
+          this.currentCardIndex--;
+        }
+        this.currentCard = this.cards[this.currentCardIndex];
       }
     }
   })
