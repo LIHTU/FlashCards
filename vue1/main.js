@@ -148,12 +148,12 @@ var app = new Vue({
             tags: "",
             revealed: false
         }
-        // ,{
-          //   prompt: "",
-          //   answer: "",
-          //   tags: "",
-          //   revealed: false
-        // }
+        ,{
+            prompt: "How would you use native css to dynamically determine the width of an element based on a combo of % and px values?",
+            answer: "calc(100% - 10px)",
+            tags: "css",
+            revealed: false
+        }
         // ,{
           //   prompt: "",
           //   answer: "",

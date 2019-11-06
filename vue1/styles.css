@@ -3,6 +3,20 @@
     --seaGreen: #44c87f;
     --appleRed: #c52607;
     --appleWhite: #fff8e6;
+    --offWhiteBlue: #e1f5ff;
+}
+
+body { 
+    background-color: var(--offWhiteBlue);
+}
+.navbar-toggler {
+    border: none;
+    
+}
+.navbar-toggler:focus {
+    border: none;
+    box-shadow: none;
+    border-color: none;
 }
 
 .first-container {
@@ -39,8 +53,10 @@
 }
 
 .red-prompt {
-    background-color: var(--appleRed);
-    color: var(--appleWhite);
+    /* background-color: darkslateblue;
+    color: var(--appleWhite); */
+    background-color: white;
+    /* color: var(--appleWhite); */
 }
 .apple-answer {
     background-color: var(--appleWhite);
