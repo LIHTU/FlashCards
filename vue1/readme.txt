@@ -20,7 +20,7 @@ TO RUN THIS APP
 ABOUT
 New data not persistent! This app has no backend and does not current leverage browser caching to implement any level of persistence.
 The app has the (currently half-baked) ability to add new cards, but this, so far, is simply to demostrate my ability to handle the 
-front-end mechanics of CRUS operations.
+front-end mechanics of CRUD operations.
 I'm currently working on the backend in another repo, using django and deploying on the google cloud platform, 
 but both of these technologies are new to me, so launch date on the served version of the app is unknown.
 Hopefully, I'll have it up by November 20th, 2019
