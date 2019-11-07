@@ -4,10 +4,11 @@
     --appleRed: #c52607;
     --appleWhite: #fff8e6;
     --offWhiteBlue: #e1f5ff;
+    --orangeCream: #ffe5b6;
 }
 
 body { 
-    background-color: var(--offWhiteBlue);
+    background-color: var(--orangeCream);
 }
 .navbar-toggler {
     border: none;
@@ -20,6 +21,7 @@ body {
 }
 
 .first-container {
+    height: 100%;
     margin: 65px 15px;
 }
 .second-container {
@@ -35,7 +37,7 @@ body {
 .f-card {
     /* width: 22rem; */
     margin: 10px auto;
-    min-height: 140px;
+    min-height: 250px;
     max-width: 586px;
     box-shadow: 2px 2px 3px #ccc;
     transition: all .5;
