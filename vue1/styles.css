@@ -87,6 +87,13 @@ pre {
     background-color: #00adff;
 }
 
+/* Bootstrap overrides */
+.card {
+    border: none;
+    box-shadow: 3px 3px 3px #c7a361;
+}
+
+
 /* Media Queries */
 /* smallest devices */
 @media (max-width: 575px) {
