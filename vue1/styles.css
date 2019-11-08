@@ -5,6 +5,8 @@
     --appleWhite: #fff8e6;
     --offWhiteBlue: #e1f5ff;
     --orangeCream: #ffe5b6;
+    --orangeCreamShadow: #c7a361;
+
 }
 
 body { 
@@ -90,7 +92,7 @@ pre {
 /* Bootstrap overrides */
 .card {
     border: none;
-    box-shadow: 3px 3px 3px #c7a361;
+    box-shadow: 3px 3px 3px var(--orangeCreamShadow);
 }
 
 

@@ -37,7 +37,7 @@ var app = new Vue({
     cards: [
       {
         prompt: "What 8 data types are defined in the ECMAScript Standard?",
-        answer: "Null, Undefined, Boolean, Number, BigInt, Symbol, String, Object (NUBN BS SO, NUBN SO BS)",
+        answer: "Null, Undefined, Boolean, Number, BigInt, Symbol, String, Object \npneumonics: (NUBN BS SO, NUBN SO BS)",
         tags: "javascript",
         revealed: false
       }
@@ -202,6 +202,12 @@ var app = new Vue({
   methods: {
     createCard: function ()
     {
+      // if (this.processing)
+      // {
+      //   return;
+      // }
+      // this.processing = true;
+
       this.cards.push(this.newCard);
       this.newCard = {
         prompt: "",
@@ -211,7 +217,7 @@ var app = new Vue({
         //  hasParent: "",
         //  parentTags: ""
       };
-      this.showNewCardForm = !this.showNewCardForm;
+      this.showNewCardForm = false;
       console.log(this.showNewCardForm);
     },
     setView: function (newView)
