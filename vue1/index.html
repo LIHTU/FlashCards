@@ -45,29 +45,23 @@
       <div class="second-container">
 
         <!-- New Card UI -->
-        <section class="">
-          <div class="card f-card" v-on:click="showNewCardForm = true">
-            <div class="card-body card-content mt-0" style="cursor: pointer">
-              <button v-if="!showNewCardForm" class="btn btn-default card-content">
-                <i class="fa fa-2x fa-plus-circle"></i>
-              </button>
-            </div>
-            <div v-show="showNewCardForm" class="card-body card-content">
-              <form>
-                <div class="form-group">
-                  <div class="label">Prompt:</div>
-                  <textarea v-model="newCard.prompt" class="form-control" rows=2 cols=60></textarea>
-                </div>
-                <div class="form-group">
-                  <div class="label">Answer:</div>
-                  <textarea v-model="newCard.answer" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                  <div class="label">Tags (Comma Separated):</div>
-                  <!-- TODO: change to type ahead -->
-                  <input v-model="newCard.tagsString" type="text" class="form-control">
-                </div>
-                <!-- <div class="form-group">
+        <div v-show="showNewCardForm" class="card f-card mt-0" v-on:click="showNewCardForm = true">
+          <div class="card-body card-content">
+            <form>
+              <div class="form-group">
+                <div class="label">Prompt:</div>
+                <textarea v-model="newCard.prompt" class="form-control" rows=2 cols=60></textarea>
+              </div>
+              <div class="form-group">
+                <div class="label">Answer:</div>
+                <textarea v-model="newCard.answer" class="form-control"></textarea>
+              </div>
+              <div class="form-group">
+                <div class="label">Tags (Comma Separated):</div>
+                <!-- TODO: change to type ahead -->
+                <input v-model="newCard.tagsString" type="text" class="form-control">
+              </div>
+              <!-- <div class="form-group">
                   <div class="label">This tag is a subcategory:</div>
                   <input v-model="newHasParent" type="checkbox" class="form-control">
                 </div>
@@ -76,17 +70,21 @@
                   <input v-model="newParentTags" type="text" class="form-control">
                 </div> -->
 
-              </form>
-              <!-- Mystery: app 'resets' if this button is in the form... -->
-              <br/>  
-              <button v-on:click="createCard()" class="btn btn-primary">Create</button>
-            </div>
+            </form>
+            <!-- Mystery: app 'resets' if this button is in the form... -->
+
           </div>
-        </section>
+          <div class="card-footer">
+            <button v-on:click="createCard()" class="btn btn-primary">Create</button>
+          </div>
+        </div>
 
         <!-- <span class="float-left">{{cards.length}}</span> -->
         <div class="display-toggler">
           <!-- todo: add a shuffle button -->
+          <button v-on:click="showNewCardForm=true" type="button" class="btn btn-secondary">
+            <i class="fa fa-plus-circle"></i>
+          </button>
           <button v-show="view=='single'" v-on:click="setView('grid')" type="button" class="btn btn-secondary">
             <i class="fa fa-th-large"></i>
           </button>
