@@ -3,13 +3,9 @@
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue.js!',
     view: 'single',
-    newPrompt: '',
-    newAnswer: '',
-    newTagsString: '',
-    newHasParent: '',
-    newParentTags: '',
+    currentCardIndex: 0,
+    showNewCardForm: false,
     newCard: {
       prompt: "",
       answer: "",
@@ -189,9 +185,7 @@ var app = new Vue({
         revealed: false
       }
 
-    ],
-    currentCardIndex: 0,
-    showNewCardForm: false,
+    ]
   },
   computed: {
     currentCard: function ()
@@ -202,11 +196,7 @@ var app = new Vue({
   methods: {
     createCard: function ()
     {
-      // if (this.processing)
-      // {
-      //   return;
-      // }
-      // this.processing = true;
+      this.showNewCardForm = false;
 
       this.cards.push(this.newCard);
       this.newCard = {
@@ -217,8 +207,7 @@ var app = new Vue({
         //  hasParent: "",
         //  parentTags: ""
       };
-      this.showNewCardForm = false;
-      console.log(this.showNewCardForm);
+      //this.showNewCardForm = false; // doesn't work :(
     },
     setView: function (newView)
     {
