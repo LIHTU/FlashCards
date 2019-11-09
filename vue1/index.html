@@ -43,6 +43,20 @@
 
     <div class="first-container">
 
+      <!-- <span class="float-left">{{cards.length}}</span> -->
+      <div class="display-toggler">
+        <!-- todo: add a shuffle button -->
+        <button v-on:click="showNewCardForm=true" type="button" class="btn btn-secondary">
+          <i class="fa fa-plus-circle"></i>
+        </button>
+        <button v-show="view=='single'" v-on:click="setView('grid')" type="button" class="btn btn-secondary">
+          <i class="fa fa-th-large"></i>
+        </button>
+        <button v-show="view=='grid'" v-on:click="setView('single')" type="button" class="btn btn-secondary">
+          <i class="fa fa-square"></i>
+        </button>
+      </div>
+
       <!-- New Card UI -->
       <div v-show="showNewCardForm" class="card f-card mt-0">
         <div class="card-body card-content">
@@ -78,20 +92,6 @@
           <button v-on:click="showNewCardForm = false" class="btn btn-warning">Close</button>
 
         </div>
-      </div>
-
-      <!-- <span class="float-left">{{cards.length}}</span> -->
-      <div class="display-toggler">
-        <!-- todo: add a shuffle button -->
-        <button v-on:click="showNewCardForm=true" type="button" class="btn btn-secondary">
-          <i class="fa fa-plus-circle"></i>
-        </button>
-        <button v-show="view=='single'" v-on:click="setView('grid')" type="button" class="btn btn-secondary">
-          <i class="fa fa-th-large"></i>
-        </button>
-        <button v-show="view=='grid'" v-on:click="setView('single')" type="button" class="btn btn-secondary">
-          <i class="fa fa-square"></i>
-        </button>
       </div>
 
       <!-- Grid View -->
