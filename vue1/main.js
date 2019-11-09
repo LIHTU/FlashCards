@@ -207,7 +207,7 @@ var app = new Vue({
         //  hasParent: "",
         //  parentTags: ""
       };
-      //this.showNewCardForm = false; // doesn't work :(
+      this.showNewCardForm = false; // doesn't work :(
     },
     setView: function (newView)
     {

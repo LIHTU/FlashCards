@@ -44,7 +44,7 @@
     <div class="first-container">
 
       <!-- New Card UI -->
-      <div v-show="showNewCardForm" class="card f-card mt-0" v-on:click="showNewCardForm = true">
+      <div v-show="showNewCardForm" class="card f-card mt-0">
         <div class="card-body card-content">
           <form>
             <div class="form-group">
@@ -74,7 +74,9 @@
 
         </div>
         <div class="card-footer">
-          <button v-on:click="createCard();" class="btn btn-primary">Create</button>
+          <button v-on:click="createCard();" class="btn btn-primary float-right">Create</button>
+          <button v-on:click="showNewCardForm = false" class="btn btn-warning">Close</button>
+
         </div>
       </div>
 
@@ -93,7 +95,7 @@
       </div>
 
       <!-- Grid View -->
-      <div v-if="view=='grid'" class="row">
+      <div v-if="view=='grid' && showNewCardForm==false" class="row">
         <div v-for="fCard in cards" class="col-sm-12 col-md-6">
           <div v-on:click="fCard.revealed = !fCard.revealed"
             v-bind:class="{'red-prompt': !fCard.revealed, 'apple-answer':fCard.revealed}" class="card f-card">
@@ -108,7 +110,7 @@
       </div>
 
       <!-- Single Card View -->
-      <div v-if="view=='single'">
+      <div v-if="view=='single' && !showNewCardForm">
         <!-- todo: put card in directive or some re-usable html as view does it. -->
         <div v-on:click="currentCard.revealed = !currentCard.revealed"
           v-bind:class="{'red-prompt': !currentCard.revealed, 'apple-answer':currentCard.revealed}" class="card f-card">
