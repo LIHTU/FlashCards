@@ -75,13 +75,13 @@
               <input v-model="newCard.tagsString" type="text" class="form-control">
             </div>
             <!-- <div class="form-group">
-                  <div class="label">This tag is a subcategory:</div>
-                  <input v-model="newHasParent" type="checkbox" class="form-control">
-                </div>
-                <div v-if="newHasParent" class="form-group">
-                  <div class="label">Parent Tag:</div>
-                  <input v-model="newParentTags" type="text" class="form-control">
-                </div> -->
+              <div class="label">This tag is a subcategory:</div>
+              <input v-model="newHasParent" type="checkbox" class="form-control">
+            </div>
+            <div v-if="newHasParent" class="form-group">
+              <div class="label">Parent Tag:</div>
+              <input v-model="newParentTags" type="text" class="form-control">
+            </div> -->
 
           </form>
           <!-- Mystery: app 'resets' if this button is in the form... -->
@@ -90,7 +90,6 @@
         <div class="card-footer">
           <button v-on:click="createCard();" class="btn btn-primary float-right">Create</button>
           <button v-on:click="showNewCardForm = false" class="btn btn-warning">Close</button>
-
         </div>
       </div>
 
@@ -105,8 +104,6 @@
             </div>
           </div>
         </div>
-
-        <!-- put new card ui here maybe -->
       </div>
 
       <!-- Single Card View -->
