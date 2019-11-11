@@ -178,13 +178,19 @@ var app = new Vue({
         revealed: false
       }
       , {
-        prompt: "What is a fragment identifier",
+        prompt: "What is a fragment identifier?",
         answer: "A fragment identifier is a string of characters that refers to a resource that is subordinate to another, primary resource, which"
           + "points to a URI.  The fragment identifier is often preceded by a '#' or '?'",
         tags: "",
         revealed: false
       }
-
+      , {
+        prompt: "Why should you specify button type in a form?",
+        answer: "If you don't the browser will treat it like a submit button, triggering a request that will probably refresh the page."
+          + "",
+        tags: "html, html forms",
+        revealed: false
+      }
     ]
   },
   computed: {
@@ -196,8 +202,6 @@ var app = new Vue({
   methods: {
     createCard: function ()
     {
-      this.showNewCardForm = false;
-
       this.cards.push(this.newCard);
       this.newCard = {
         prompt: "",
@@ -238,6 +242,17 @@ var app = new Vue({
         this.currentCardIndex--;
       }
       this.currentCard = this.cards[this.currentCardIndex];
+    },
+    shuffleCards: function ()
+    {
+      var shuffledSet = [];
+      for (var card in this.cards)
+      {
+        getRandomInt(this.cards.length);
+      }
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
     },
     promiseToSleep: function sleep(ms)
     {

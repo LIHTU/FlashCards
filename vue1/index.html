@@ -82,14 +82,11 @@
               <div class="label">Parent Tag:</div>
               <input v-model="newParentTags" type="text" class="form-control">
             </div> -->
-
           </form>
-          <!-- Mystery: app 'resets' if this button is in the form... -->
-
         </div>
         <div class="card-footer">
-          <button v-on:click="createCard();" class="btn btn-primary float-right">Create</button>
-          <button v-on:click="showNewCardForm = false" class="btn btn-warning">Close</button>
+          <button v-on:click="createCard();" type="button" class="btn btn-primary float-right">Create</button>
+          <button v-on:click="showNewCardForm = false" type="button" class="btn btn-warning">Close</button>
         </div>
       </div>
 
