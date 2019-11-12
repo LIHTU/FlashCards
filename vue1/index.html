@@ -43,12 +43,11 @@
 
     <div class="first-container">
 
-      <!-- <span class="float-left">{{cards.length}}</span> -->
       <div class="display-toggler">
         <button v-on:click="shuffle(currentSet)" type="button" class="btn btn-secondary">
           <i class="fa fa-random"></i>
         </button>
-        <button v-on:click="showNewCardForm=true" type="button" class="btn btn-secondary">
+        <button v-on:click="showNewCardForm=true" v-bind:disabled="showNewCardForm" type="button" class="btn btn-secondary">
           <i class="fa fa-plus-circle"></i>
         </button>
         <button v-show="view=='single'" v-on:click="setView('grid')" type="button" class="btn btn-secondary">
@@ -94,8 +93,8 @@
       </div>
 
       <!-- Grid View -->
-      <div v-cloak v-if="view=='grid' && showNewCardForm==false" class="row">
-        <div v-for="fCard in cards" class="col-sm-12 col-md-6">
+      <div id="gridContainer" v-cloak v-if="view=='grid' && showNewCardForm==false" class="row">
+        <div v-for="fCard in cards" class="col-sm-12 col-md-6 col-xl-4">
           <div v-on:click="fCard.revealed = !fCard.revealed"
             v-bind:class="{'red-prompt': !fCard.revealed, 'apple-answer':fCard.revealed}" class="card f-card">
             <div class="card-body card-content">

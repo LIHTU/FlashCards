@@ -204,6 +204,12 @@ var app = new Vue({
         tags: "computer science, js",
         revealed: false
       }
+      , {
+        prompt: "What is the shorthand for\n <pre>v-bind:disabled='<expression>'</pre>?",
+        answer: "<pre>:disabled=\'<expression>\'</pre>",
+        tags: "vue",
+        revealed: false
+      }
     ]
   },
   computed: {

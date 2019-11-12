@@ -74,7 +74,6 @@ pre {
     font-family: monospace;
     background-color: #444;
     color: var(--seaGreen);
-    margin: 10px;
     padding: 5px;
     border-radius: 3px;
     text-align: left;
@@ -83,7 +82,9 @@ pre {
 .prompt {
     font-weight: bold;
 }
-
+.answer {
+    width: 100%;
+}
 .button-container {
     justify-content: space-evenly;
 }
