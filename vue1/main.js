@@ -6,6 +6,7 @@ var app = new Vue({
     view: 'single',
     currentCardIndex: 0,
     showNewCardForm: false,
+    currentSet: [],
     newCard: {
       prompt: "",
       answer: "",
@@ -186,9 +187,21 @@ var app = new Vue({
       }
       , {
         prompt: "Why should you specify button type in a form?",
-        answer: "If you don't the browser will treat it like a submit button, triggering a request that will probably refresh the page."
-          + "",
+        answer: "If you don't the browser will treat it like a submit button, triggering a request that will probably refresh the page.",
         tags: "html, html forms",
+        revealed: false
+      }
+      , {
+        prompt: "What do the squre brackets mean in mdn sytax notation?",
+        answer: "The square brackets mean that the enclosed parameter is optional.",
+        tags: "computer science, js",
+        revealed: false
+      }
+      , {
+        prompt: "What are the parameters of splice (js)?",
+        answer: "<pre>var arrDeletedItems = \narray.splice(start[, deleteCount[, item1[, item2[, ...]]]])</pre>"
+          +"\n<a target='_blank' href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice'>mdn</a>",
+        tags: "computer science, js",
         revealed: false
       }
     ]
@@ -243,26 +256,38 @@ var app = new Vue({
       }
       this.currentCard = this.cards[this.currentCardIndex];
     },
-    shuffleCards: function ()
+    shuffle: function (set)
     {
-      var shuffledSet = [];
-      for (var card in this.cards)
+      if (!set || set.length==0)
       {
-        getRandomInt(this.cards.length);
+        var set = this.cards;
+      } else
+      {
+        set = this.currentSet;
+      }
+      var shuffledSet = [];
+      while (set.length > 0)
+      {
+        let randIndex = getRandomInt(set.length);
+        let pluckedCard = set.splice(randIndex, 1)[0];
+        shuffledSet.push(pluckedCard);
       }
       function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
       }
+      this.cards = shuffledSet;
     },
     promiseToSleep: function sleep(ms)
     {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
-    sleep: async function ()
+    sleep: async function (ms)
     {
       console.log('Taking a break...');
-      await promiseToSleep(2000);
-      console.log('Two seconds later, showing sleep in a loop...');
+      // await promiseToSleep(2000);
+      await new Promise(resolve => setTimeout(resolve, ms));
+
+      console.log(`${ms}ms later, showing sleep in a loop...`);
     }
   }
 })
