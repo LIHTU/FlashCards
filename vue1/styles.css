@@ -93,6 +93,11 @@ pre {
     display: flex;
     background-color: #00adff;
 }
+.my-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* Bootstrap overrides */
 .card {

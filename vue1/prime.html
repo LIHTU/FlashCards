@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- how to hack google forms/sheets: https://www.youtube.com/watch?v=cOgUder1B6k -->
+<!-- blog how to on google sheets api: https://blog.usejournal.com/how-to-use-google-sheets-as-a-cms-or-a-database-f9d8e736fdce -->
+<!-- google sheets api: https://console.cloud.google.com/apis/api/sheets.googleapis.com/overview?project=animated-codex-140623&folder&organizationId -->
+<!-- docs on managing account keys, i.e. Flash Cards-90cc....json https://cloud.google.com/iam/docs/understanding-service-accounts?hl=en_US#managing_service_account_keys-->
+
+<head>
+    <title>Flash Cards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <script src="http://cdn.jsdelivr.net/vue/2.0.3/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="C:\code\vueApps\vue1\css\startbootstrap-freelancer\css\freelancer.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <main id="primeApp" style="text-align: center;">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Primes</a>
+        </nav>
+
+        <div class="first-container">
+            <h3 style="text-align: center;">Check if a number is prime!</h3>
+            <form>
+                <div class="form-group my-flex">
+                    <input v-model="num" id="myNumber" class="form-control" type="number"
+                        style="width: 200px; margin: 0 15px;" placeholder="Enter a Number" />
+                    <button v-on:click="checkIfPrime()" class="btn btn-secondary" type="button">check</button>
+                    <button v-on:click="bruteForce()" class="btn btn-danger" style="margin-left: 10px" type="button">brute force!</button>
+                </div>
+            </form>
+            <br />
+            <div v-if="isPrime == 'yes'" class="alert alert-success">It's prime! We checked all integers from 2 through
+                {{oldCandidate-1}} as factors.</div>
+            <div v-if="isPrime == 'no'" class="alert alert-warning">It's not prime! It's divisible by {{candidate}} and
+                {{factor}}</div>
+        </div>
+
+    </main><!-- end vue app -->
+    <!-- Warning: html below closing </main> tag NOT IN APP!!! -->
+
+    <script src="prime.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
