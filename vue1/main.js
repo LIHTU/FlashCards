@@ -210,6 +210,32 @@ var app = new Vue({
         tags: "vue",
         revealed: false
       }
+      , {
+        prompt: "How would you use cat in linux cli?",
+        answer: "'cat filename' to display contents of file.\n"
+          + "'cat >newfilename' to crate a new file. cursor stays active to enter file contents. ctrl+c to exit.",
+        tags: "linux cli",
+        revealed: false
+      }
+      , {
+        prompt: "How are macOs and Linux related?",
+        answer: "Linux and macOS both follow the POSIX standard. POSIX stands for Portable Operating System Interface for Unix-like Operating Systems."
+          + "This compatibility makes it possible to compile applications developed on Linux on macOS systems",
+        tags: "linux, macOs, operating systems",
+        revealed: false
+      }
+      , {
+        prompt: "How do you indicated that a file or folder should be hidden in linux?",
+        answer: "prefix the name with a '.'",
+        tags: "linux",
+        revealed: false
+      }
+      , {
+        prompt: "How do you recursively show contents of all subdirectories?",
+        answer: "<pre>ls -R</pre>",
+        tags: "linux cli",
+        revealed: false
+      }
     ]
   },
   computed: {
