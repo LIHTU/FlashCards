@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- my head -->
+    <title>Flash Cards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <meta http-equiv=“CACHE-CONTROL” content=”NO-CACHE”>
+    <!-- <script src="http://cdn.jsdelivr.net/vue/2.0.3/vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css\startbootstrap-freelancer\css\freelancer.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- end my head -->
 
+    <!-- start firebase head -->
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/7.4.0/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
@@ -15,7 +25,7 @@
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
 
-    <style media="screen">
+    <!-- <style media="screen">
       body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
       #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
       #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
@@ -28,15 +38,145 @@
         body, #message { margin-top: 0; background: white; box-shadow: none; }
         body { border-top: 16px solid #ffa100; }
       }
-    </style>
+    </style> -->
+    <!-- end firebase head -->
   </head>
   <body>
-    <div id="message">
+    <main id="app">
+    
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Card Tree</a>
+        <!-- <button class="navbar-toggler pull-right" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Manage Sets</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="#">css theme specimens</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="otherNav.html">Other Nav</a>
+              </li>
+            </ul>
+          </div> -->
+      </nav>
+    
+      <div class="first-container">
+    
+        <div class="display-toggler">
+          <button v-on:click="shuffle(currentSet)" type="button" class="btn btn-secondary">
+            <i class="fa fa-random"></i>
+          </button>
+          <button v-on:click="showNewCardForm=true" v-bind:disabled="showNewCardForm" type="button"
+            class="btn btn-secondary">
+            <i class="fa fa-plus-circle"></i>
+          </button>
+          <button v-show="view=='single'" v-on:click="setView('grid')" type="button" class="btn btn-secondary">
+            <i class="fa fa-th-large"></i>
+          </button>
+          <button v-cloak v-show="view=='grid'" v-on:click="setView('single')" type="button" class="btn btn-secondary">
+            <i class="fa fa-square"></i>
+          </button>
+        </div>
+    
+        <!-- New Card UI -->
+        <div v-cloak v-show="showNewCardForm" class="card f-card mt-0">
+          <div class="card-body card-content">
+            <form>
+              <div class="form-group">
+                <div class="label">Prompt:</div>
+                <textarea v-model="newCard.prompt" class="form-control" rows=2 cols=60></textarea>
+              </div>
+              <div class="form-group">
+                <div class="label">Answer:</div>
+                <textarea v-model="newCard.answer" class="form-control"></textarea>
+              </div>
+              <div class="form-group">
+                <div class="label">Tags (Comma Separated):</div>
+                <!-- TODO: change to type ahead -->
+                <input v-model="newCard.tagsString" type="text" class="form-control">
+              </div>
+              <!-- <div class="form-group">
+                  <div class="label">This tag is a subcategory:</div>
+                  <input v-model="newHasParent" type="checkbox" class="form-control">
+                </div>
+                <div v-if="newHasParent" class="form-group">
+                  <div class="label">Parent Tag:</div>
+                  <input v-model="newParentTags" type="text" class="form-control">
+                </div> -->
+            </form>
+          </div>
+          <div class="card-footer">
+            <!-- TODO: SHOW DISABLED WHEN FORM SHOWN  -->
+            <button v-on:click="createCard();" type="button" class="btn btn-primary float-right">Create</button>
+            <button v-on:click="showNewCardForm = false" type="button" class="btn btn-warning">Close</button>
+          </div>
+        </div>
+    
+        <!-- Grid View -->
+        <div id="gridContainer" v-cloak v-if="view=='grid' && showNewCardForm==false" class="row">
+          <div v-for="fCard in cards" class="col-sm-12 col-md-6 col-xl-4">
+            <div v-on:click="fCard.revealed = !fCard.revealed"
+              v-bind:class="{'red-prompt': !fCard.revealed, 'apple-answer':fCard.revealed}" class="card f-card">
+              <div class="card-body card-content">
+                <p v-if="!fCard.revealed" v-html="fCard.prompt" class="prompt"></p>
+                <p v-else class="answer" v-html="fCard.answer"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Single Card View -->
+        <div v-if="view=='single' && !showNewCardForm">
+          <!-- todo: put card in directive or some re-usable html as view does it. -->
+          <div v-on:click="currentCard.revealed = !currentCard.revealed"
+            v-bind:class="{'red-prompt': !currentCard.revealed, 'apple-answer':currentCard.revealed}" class="card f-card">
+            <div class="card-body card-content">
+              <p v-if="!currentCard.revealed" v-html="currentCard.prompt" class="prompt"></p>
+              <p v-else class="answer" v-html="currentCard.answer"></p>
+            </div>
+          </div>
+          <div class="nextPrevRow">
+            <button @click="prevCard()" class="btn btn-secondary">Prev</button>
+            <button @click="nextCard()" class="btn btn-secondary float-right">Next</button>
+          </div>
+        </div>
+      </div>
+    
+    </main><!-- end vue app -->
+    <!-- Warning: html below closing </main> tag NOT IN APP!!! -->
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.4.0/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+           https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="/__/firebase/7.4.0/firebase-analytics.js"></script>
+    
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    
+    <script src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Firebase Body -->
+    <!-- <div id="message">
       <h2>Welcome</h2>
       <h1>Firebase Hosting Setup Complete</h1>
       <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
       <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
+    </div>-->
+    <!-- end Firebae body -->
     <p id="load">Firebase SDK Loading&hellip;</p>
 
     <script>
