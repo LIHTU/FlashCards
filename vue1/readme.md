@@ -12,7 +12,7 @@ I'm traditionally a AngularJS devloper, but am trying out vue as it's highly fav
 
 ## About
 New data not yet persistent! Card data is just stored as json in a front-end js file. The backend of the app is in progress.
-I'm currently working on building out storage and a nosql database using google's [firebase](https://firebase.google.com/).
+I'm currently working on building out storage and a nosql database using google's [firebase](https://firebase.google.com/), and the nosql implentation is the newer Cloud Firestore (not the older Realtime Database).
 
 ## Warnings
 I'm using v-html to display card text so that I can put styling html in the card data.  This is a secruity 'no-no' espeically since card data can be input by users, making this a textbook case for a Cross-Site Scripting (XXS) attack!  Curiously, however, I haven't been able to exploit the vulnerability by putting a script tag in a new card.  If you know why this doesn't work, I'd love to hear from you!  I'll stop using the v-html directive before I actually allow user input to hit the server and be retrieved, and you should too, just in case someone does figure out how to exploint this supposedly gaping security hole!
