@@ -9,7 +9,7 @@
     ]
   },
   "hosting": {
-    "public": "wwwroot",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",

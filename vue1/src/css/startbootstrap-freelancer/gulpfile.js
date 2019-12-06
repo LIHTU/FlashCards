@@ -14,7 +14,7 @@ const sass = require("gulp-sass");
 const uglify = require("gulp-uglify");
 
 // Load package.json for banner
-const pkg = require('./package.json.js');
+const pkg = require('./package.json.js.js');
 
 // Set the banner content
 const banner = ['/*!\n',
