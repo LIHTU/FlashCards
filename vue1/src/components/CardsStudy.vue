@@ -57,6 +57,7 @@
 
         <!-- New Card UI -->
         <div v-cloak v-show="showNewCardForm" class="card f-card mt-0">
+          <div class="card-header">New Card</div>
           <div class="card-body card-content">
             <form>
               <div class="form-group">
