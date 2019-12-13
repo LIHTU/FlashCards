@@ -34,7 +34,7 @@
             type="button"
             class="btn btn-secondary"
           >
-            <i class="fa fa-plus-circle"></i>
+            <i class="fa fa-plus-circle"></i><font-awesome-icon icon="plus-circle" /><font-awesome-icon icon="coffee" />
           </button>
           <button
             v-show="view=='single'"
