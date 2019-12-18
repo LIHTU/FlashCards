@@ -24,7 +24,7 @@
       </nav>
 
       <div class="first-container">
-        <div class="display-toggler">
+        <div class="button-container display-toggler">
           <button v-on:click="shuffle(currentSet)" type="button" class="btn btn-secondary">
             <i class="fa fa-random"></i>
           </button>
@@ -34,7 +34,7 @@
             type="button"
             class="btn btn-secondary"
           >
-            <i class="fa fa-plus-circle"></i><font-awesome-icon icon="plus-circle" /><font-awesome-icon icon="coffee" />
+            <font-awesome-icon icon="plus-circle" />
           </button>
           <button
             v-show="view=='single'"
@@ -141,7 +141,7 @@ export default {
   },
   data: function() {
     return {
-      view: 'single',
+      view: "single",
       currentCardIndex: 0,
       showNewCardForm: false,
       currentSet: [],
@@ -157,234 +157,259 @@ export default {
       // todo2: request card data from a server.
       tags: [
         {
-          name: 'front-end',
+          name: "front-end",
           parentTags: []
         },
         {
-          name: 'js',
-          parentTags: ['front-end']
+          name: "js",
+          parentTags: ["front-end"]
         },
         {
-          name: 'vue',
-          parentTags: ['js', 'front-end']
+          name: "vue",
+          parentTags: ["js", "front-end"]
         }
       ],
       cards: [
         {
           prompt: "What 8 data types are defined in the ECMAScript Standard?",
-          answer: "Null, Undefined, Boolean, Number, BigInt, Symbol, String, Object \npneumonics: (NUBN BS SO, NUBN SO BS)",
+          answer:
+            "Null, Undefined, Boolean, Number, BigInt, Symbol, String, Object \npneumonics: (NUBN BS SO, NUBN SO BS)",
           tags: "javascript",
           revealed: false
-        }
-        , {
-          prompt: "What vue directive would you use to bind an html attribute to the vue data model?",
+        },
+        {
+          prompt:
+            "What vue directive would you use to bind an html attribute to the vue data model?",
           answer: "v-bind:src='./imanges/foo.jpg'",
           tags: "javascript, vue, robin",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "How do you import a js file into another as a module?",
-          answer: "In module file items to export should be inside of an iief that is assigned to a var. The iief returns all needed items.\n"
-            + "<pre>var itemsToExport = (function () {\n\tvar foo = 1;\n\tvar bar = 'a';\n\treturn {foo: foo, bar: bar};\n})();\n"
-            + "module.exports = itemsToExport;</pre>\n"
-            + "in file that utilizes module: <pre>var usefulObjectImport = require('./path/fileWithItemsToExport')\n"
-            + "var usefulThing = usefulObjectImport.foo;</pre>",
+          answer:
+            "In module file items to export should be inside of an iief that is assigned to a var. The iief returns all needed items.\n" +
+            "<pre>var itemsToExport = (function () {\n\tvar foo = 1;\n\tvar bar = 'a';\n\treturn {foo: foo, bar: bar};\n})();\n" +
+            "module.exports = itemsToExport;</pre>\n" +
+            "in file that utilizes module: <pre>var usefulObjectImport = require('./path/fileWithItemsToExport')\n" +
+            "var usefulThing = usefulObjectImport.foo;</pre>",
           tags: "javascript, front-end architecture, robin",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What is hoisting in javascript?",
-          answer: "Hoisting allows the declaration of a variable after it's definition\n"
-            + "<pre>x = 5;\nvar x;</pre>\n"
-            + "variables defined with let and const cannot be hoisted."
-          ,
+          answer:
+            "Hoisting allows the declaration of a variable after it's definition\n" +
+            "<pre>x = 5;\nvar x;</pre>\n" +
+            "variables defined with let and const cannot be hoisted.",
           tags: "javascript",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What is the use of <b>let</b> in js?",
-          answer: "It declares a block level variable that is not added to the global window object."
-            + "<b>var</b> on the otherhand is function level and is available outside the block it was defined in within that blocks function."
-            + "\nUseful if you need a tightly scoped variable or func.  Also good for declarations in for and while loops.",
+          answer:
+            "It declares a block level variable that is not added to the global window object." +
+            "<b>var</b> on the otherhand is function level and is available outside the block it was defined in within that blocks function." +
+            "\nUseful if you need a tightly scoped variable or func.  Also good for declarations in for and while loops.",
           tags: "javascript",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "How would you define and use a css variable (native)",
-          answer: "define\n<pre>:root {\n\t--seaGreen: #44c87f;\n}</pre>\n\n"
-            + "use:\n<pre>"
-            + "div {\n\tcolor: var(--seaGreen);\n}"
-            + "</pre>",
+          answer:
+            "define\n<pre>:root {\n\t--seaGreen: #44c87f;\n}</pre>\n\n" +
+            "use:\n<pre>" +
+            "div {\n\tcolor: var(--seaGreen);\n}" +
+            "</pre>",
           tags: "css",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What is a Google Cloud Platform Managed Zone?",
-          answer: "A managed zone is the container for all of your DNS records that share the same domain name, for example, example.com",
+          answer:
+            "A managed zone is the container for all of your DNS records that share the same domain name, for example, example.com",
           tags: "web hosting",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "How would you make an a tag open in a new tab or window?",
-          answer: "<pre>target='_blank'</pre>\nLink will open in a new tab or window depending on browser settings.",
+          answer:
+            "<pre>target='_blank'</pre>\nLink will open in a new tab or window depending on browser settings.",
           tags: "html",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "How would you title a web page?",
           answer: "Use the title tag",
           tags: "html",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What is a static asset? (webapp)",
-          answer: "Files like JS, css, and images that don't need to be rendered (as views often do) by the server.  Static files should be cached by the browser.",
+          answer:
+            "Files like JS, css, and images that don't need to be rendered (as views often do) by the server.  Static files should be cached by the browser.",
           tags: "web architecture",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "How are static files cached in the browser invalidated?",
           answer: "",
           tags: "",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What is the etag in an http response header?",
-          answer: "It contains a hash for the requested file which determines whether the cache should be invalidated or not.",
+          answer:
+            "It contains a hash for the requested file which determines whether the cache should be invalidated or not.",
           tags: "http",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What 4 http response headers are used for cache control?",
           answer: "expires, last-modified, cache-control, ETag",
           tags: "http",
           revealed: false
-        }
-        , {
-          prompt: "What is the http response header cache-control: 'no-cache' used for?",
-          answer: "Misleading.  It instructs the browser to cache the file! But it also instructs the browser to verify the etag with the server.  This cache-control method is used frequently.\n" +
+        },
+        {
+          prompt:
+            "What is the http response header cache-control: 'no-cache' used for?",
+          answer:
+            "Misleading.  It instructs the browser to cache the file! But it also instructs the browser to verify the etag with the server.  This cache-control method is used frequently.\n" +
             "'no-store' on the other hand tells the browser not to cache the file.",
           tags: "http",
           revealed: false
-        }
-        , {
-          prompt: "In a nutshell, what are user authentication and authorization? How are they different?",
-          answer: "Authentication deals with the matter of <b>who</b> the user is. Authorization handles matters of <b>What<b>",
+        },
+        {
+          prompt:
+            "In a nutshell, what are user authentication and authorization? How are they different?",
+          answer:
+            "Authentication deals with the matter of <b>who</b> the user is. Authorization handles matters of <b>What<b>",
           tags: "web security",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What is cross site scripting attack?",
-          answer: "it's when a user enters html to an input and that html can be run in others users browser, which allows script tags and their contents to be injected.",
+          answer:
+            "it's when a user enters html to an input and that html can be run in others users browser, which allows script tags and their contents to be injected.",
           tags: "web security",
           revealed: false
-        }
-        , {
-          prompt: "How would you prevent a view model object from continuing to be updated, say, by a change in one of it's dependencies?",
+        },
+        {
+          prompt:
+            "How would you prevent a view model object from continuing to be updated, say, by a change in one of it's dependencies?",
           answer: "object.freeze()",
           tags: "vue",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What are some steps of a vue instance initialization?",
-          answer: "1. set up data observation\n2.compile the template \n3. mount the instance to the DOM \n4.update the DOM when data changes",
+          answer:
+            "1. set up data observation\n2.compile the template \n3. mount the instance to the DOM \n4.update the DOM when data changes",
           tags: "vue",
           revealed: false
-        }
-        , {
-          prompt: "What's the diff between <i>await Html.PartialAsync(_view) and <i>@RenderPartial</i>?",
+        },
+        {
+          prompt:
+            "What's the diff between <i>await Html.PartialAsync(_view) and <i>@RenderPartial</i>?",
           answer: "...",
           tags: "asp.net",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "Describe the function of align-items in flexbox",
-          answer: "It's a class applied to a container that aligns clidren vertically along the 'cross axis'.",
+          answer:
+            "It's a class applied to a container that aligns clidren vertically along the 'cross axis'.",
           tags: "flexbox",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What are the advantages of a single page application?",
           answer: "",
           tags: "",
           revealed: false
-        }
-        , {
-          prompt: "How would you use native css to dynamically determine the width of an element based on a combo of % and px values?",
+        },
+        {
+          prompt:
+            "How would you use native css to dynamically determine the width of an element based on a combo of % and px values?",
           answer: "calc(100% - 10px)",
           tags: "css",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What is a fragment identifier?",
-          answer: "A fragment identifier is a string of characters that refers to a resource that is subordinate to another, primary resource, which"
-            + "points to a URI.  The fragment identifier is often preceded by a '#' or '?'",
+          answer:
+            "A fragment identifier is a string of characters that refers to a resource that is subordinate to another, primary resource, which" +
+            "points to a URI.  The fragment identifier is often preceded by a '#' or '?'",
           tags: "",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "Why should you specify button type in a form?",
-          answer: "If you don't the browser will treat it like a submit button, triggering a request that will probably refresh the page.",
+          answer:
+            "If you don't the browser will treat it like a submit button, triggering a request that will probably refresh the page.",
           tags: "html, html forms",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What do the squre brackets mean in mdn sytax notation?",
-          answer: "The square brackets mean that the enclosed parameter is optional.",
+          answer:
+            "The square brackets mean that the enclosed parameter is optional.",
           tags: "computer science, js",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "What are the parameters of splice (js)?",
-          answer: "<pre>var arrDeletedItems = \narray.splice(start[, deleteCount[, item1[, item2[, ...]]]])</pre>"
-            +"\n<a target='_blank' href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice'>mdn</a>",
+          answer:
+            "<pre>var arrDeletedItems = \narray.splice(start[, deleteCount[, item1[, item2[, ...]]]])</pre>" +
+            "\n<a target='_blank' href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice'>mdn</a>",
           tags: "computer science, js",
           revealed: false
-        }
-        , {
-          prompt: "What is the shorthand for\n <pre>v-bind:disabled='<expression>'</pre>?",
+        },
+        {
+          prompt:
+            "What is the shorthand for\n <pre>v-bind:disabled='<expression>'</pre>?",
           answer: "<pre>:disabled='<expression>'</pre>",
           tags: "vue",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "How would you use cat in linux cli?",
-          answer: "'cat filename' to display contents of file.\n"
-            + "'cat >newfilename' to crate a new file. cursor stays active to enter file contents. ctrl+c to exit.",
+          answer:
+            "'cat filename' to display contents of file.\n" +
+            "'cat >newfilename' to crate a new file. cursor stays active to enter file contents. ctrl+c to exit.",
           tags: "linux cli",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "How are macOs and Linux related?",
-          answer: "Linux and macOS both follow the POSIX standard. POSIX stands for Portable Operating System Interface for Unix-like Operating Systems."
-            + "This compatibility makes it possible to compile applications developed on Linux on macOS systems",
+          answer:
+            "Linux and macOS both follow the POSIX standard. POSIX stands for Portable Operating System Interface for Unix-like Operating Systems." +
+            "This compatibility makes it possible to compile applications developed on Linux on macOS systems",
           tags: "linux, macOs, operating systems",
           revealed: false
-        }
-        , {
-          prompt: "How do you indicated that a file or folder should be hidden in linux?",
+        },
+        {
+          prompt:
+            "How do you indicated that a file or folder should be hidden in linux?",
           answer: "prefix the name with a '.'",
           tags: "linux",
           revealed: false
-        }
-        , {
+        },
+        {
           prompt: "How do you recursively show contents of all subdirectories?",
           answer: "<pre>ls -R</pre>",
           tags: "linux cli",
           revealed: false
         }
       ]
-    }
+    };
   },
   computed: {
-    currentCard: function ()
-    {
+    currentCard: function() {
       return this.cards[this.currentCardIndex];
     }
   },
   methods: {
-    createCard: function ()
-    {
+    createCard: function() {
       this.cards.push(this.newCard);
       this.newCard = {
         prompt: "",
@@ -396,47 +421,36 @@ export default {
       };
       this.showNewCardForm = false; // doesn't work :(
     },
-    setView: function (newView)
-    {
+    setView: function(newView) {
       this.view = newView;
       return newView;
     },
-    nextCard: function ()
-    {
+    nextCard: function() {
       // handle going to begining of array from end.
-      if (this.currentCardIndex == this.cards.length - 1)
-      {
+      if (this.currentCardIndex == this.cards.length - 1) {
         this.currentCardIndex = 0;
-      } else
-      {
+      } else {
         this.currentCardIndex++;
       }
       this.currentCard = this.cards[this.currentCardIndex];
     },
-    prevCard: function ()
-    {
+    prevCard: function() {
       // handle going to begining of array from end.
-      if (this.currentCardIndex == 0)
-      {
+      if (this.currentCardIndex == 0) {
         this.currentCardIndex = this.cards.length - 1;
-      } else
-      {
+      } else {
         this.currentCardIndex--;
       }
       this.currentCard = this.cards[this.currentCardIndex];
     },
-    shuffle: function (set)
-    {
-      if (set.length==0)
-      {
+    shuffle: function(set) {
+      if (set.length == 0) {
         set = this.cards;
-      } else
-      {
+      } else {
         set = this.currentSet;
       }
       var shuffledSet = [];
-      while (set.length > 0)
-      {
+      while (set.length > 0) {
         let randIndex = getRandomInt(set.length);
         let pluckedCard = set.splice(randIndex, 1)[0];
         shuffledSet.push(pluckedCard);
@@ -446,12 +460,10 @@ export default {
       }
       this.cards = shuffledSet;
     },
-    promiseToSleep: function sleep(ms)
-    {
+    promiseToSleep: function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
-    sleep: async function (ms)
-    {
+    sleep: async function(ms) {
       // console.log('Taking a break...');
       // await promiseToSleep(2000);
       await new Promise(resolve => setTimeout(resolve, ms));
@@ -459,12 +471,60 @@ export default {
       // console.log(`${ms}ms later, showing sleep in a loop...`);
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-p.red {
-  color: red;
+<style>
+pre {
+  font-family: monospace;
+  background-color: #444;
+  color: var(--seaGreen);
+  padding: 5px;
+  border-radius: 3px;
+  text-align: left;
+}
+
+.prompt {
+  font-weight: bold;
+}
+.answer {
+  width: 100%;
+}
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+.button-container button {
+  margin: 0 3px;
+}
+.f-card {
+  /* width: 22rem; */
+  margin: 10px auto;
+  min-height: 250px;
+  max-width: 586px;
+  box-shadow: 2px 2px 3px #ccc;
+  transition: all 0.5;
+}
+.nextPrevRow {
+  margin: 10px auto;
+  max-width: 586px;
+}
+
+.card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.red-prompt {
+  /* background-color: darkslateblue;
+    color: var(--appleWhite); */
+  background-color: white;
+  /* color: var(--appleWhite); */
+}
+.apple-answer {
+  background-color: var(--appleWhite);
 }
 </style>
