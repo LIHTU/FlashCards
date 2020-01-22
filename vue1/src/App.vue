@@ -35,7 +35,7 @@ export default {
 }
 
 body {
-  background-color: var(--orangeCream) !important;
+  /* background-color: var(--orangeCream) !important; */
 }
 .navbar-toggler {
   border: none;
@@ -91,4 +91,12 @@ body {
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
 }
+</style>
+
+<style>
+  p.cats {
+    color: yellow; 
+  }
+  @import 'css/styles.css'
+  
 </style>

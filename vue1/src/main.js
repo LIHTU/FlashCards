@@ -5,6 +5,12 @@ import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
+// theme css
+import './css/startbootstrap-freelancer/css/freelancer.min.css'
+
+// custom css
+import './css/styles.css';
+
 // import 'bootstrap'
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
