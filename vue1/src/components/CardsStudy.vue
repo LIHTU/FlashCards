@@ -25,7 +25,7 @@
 
       <div class="first-container">
         <div class="button-container display-toggler">
-          <button v-on:click="shuffle(currentSet)" type="button" class="btn btn-secondary">
+          <button v-on:click="shuffle()" type="button" class="btn btn-secondary">
             <i class="fa fa-random"></i>
           </button>
           <button
@@ -134,6 +134,7 @@
 </template>
 
 <script>
+
 export default {
   name: "CardsStudy",
   props: {
@@ -144,6 +145,7 @@ export default {
       view: "single",
       currentCardIndex: 0,
       showNewCardForm: false,
+      // currentSet: this.$store.state.currentSet,
       currentSet: [],
       newCard: {
         prompt: "",
@@ -169,6 +171,7 @@ export default {
           parentTags: ["js", "front-end"]
         }
       ],
+      // cards: this.store.state.cards
       cards: [
         {
           prompt: "What 8 data types are defined in the ECMAScript Standard?",
@@ -446,8 +449,10 @@ export default {
     shuffle: function(set) {
       if (set.length == 0) {
         set = this.cards;
+        // console.log('set:', cards);
       } else {
         set = this.currentSet;
+        // console.log('set:', currentSet);
       }
       var shuffledSet = [];
       while (set.length > 0) {
