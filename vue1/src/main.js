@@ -99,12 +99,11 @@ import {mapState} from 'vuex';
 new Vue({
   el: '#app',
   store,
-  computed: {}
+  computed: {},
   // mapGetters([
   //   // 'gettersDoneTodos' // doesn't work.  Need to pass $store.getters.obj into component's data instead.
   // ])
   // try to access done todo from here in the following syntax:
-  // {doneTodos: $store.state.getters.doneTodos},
-  ,
+  // {doneTodos: $store.state.getters.doneTodos}  // also doesn't work to call 'doneTodos' in data of child component after setting this here.
   render: h => h(App), 
 });
