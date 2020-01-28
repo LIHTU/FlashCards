@@ -24,6 +24,17 @@
       </nav>
 
       <div class="first-container">
+
+        <!-- vuex demos -->
+      
+        <div>{{message}} (if you see "keep trying" it means you're able to access store.state with out setting it in computed on app instantiation.  Why?  maybe adding it to app instantiation makes it reactive?)</div>
+        
+        <h3>Getters Done Todos: </h3> 
+        <div v-for="todo in doneTodos" v-bind:key="todo.text">
+          {{todo.text}}
+        </div>
+        <!-- end vuex demos -->
+
         <div class="button-container display-toggler">
           <button v-on:click="shuffle()" type="button" class="btn btn-secondary">
             <i class="fa fa-random"></i>
@@ -142,11 +153,14 @@ export default {
   },
   data: function() {
     return {
+      todos: this.$store.state.todos,
+      message: this.$store.state.message,
+      doneTodos: this.$store.getters.doneTodos,
+      cat: 'cat',
       view: "single",
       currentCardIndex: 0,
       showNewCardForm: false,
       // currentSet: this.$store.state.currentSet,
-      currentSet: [],
       newCard: {
         prompt: "",
         answer: "",
@@ -171,7 +185,7 @@ export default {
           parentTags: ["js", "front-end"]
         }
       ],
-      // cards: this.store.state.cards
+      // cards: this.$store.state.cards
       cards: [
         {
           prompt: "What 8 data types are defined in the ECMAScript Standard?",
@@ -409,7 +423,8 @@ export default {
   computed: {
     currentCard: function() {
       return this.cards[this.currentCardIndex];
-    }
+    },
+    currentSet: function() {return this.cards}
   },
   methods: {
     createCard: function() {
@@ -447,7 +462,7 @@ export default {
       this.currentCard = this.cards[this.currentCardIndex];
     },
     shuffle: function(set) {
-      if (set.length == 0) {
+      if (set && set.length == 0) {
         set = this.cards;
         // console.log('set:', cards);
       } else {
