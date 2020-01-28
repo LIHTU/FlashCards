@@ -6,12 +6,12 @@
 
         <!-- vuex demos -->
       
-        <div>{{message}} (if you see "keep trying" it means you're able to access store.state with out setting it in computed on app instantiation.  Why?  maybe adding it to app instantiation makes it reactive?)</div>
+        <!-- <div>{{message}} (if you see "keep trying" it means you're able to access store.state with out setting it in computed on app instantiation.  Why?  maybe adding it to app instantiation makes it reactive?)</div>
         
         <h3>Getters Done Todos: </h3> 
         <div v-for="todo in doneTodos" v-bind:key="todo.text">
           {{todo.text}}
-        </div>
+        </div> -->
         <!-- end vuex demos -->
 
         <div class="button-container display-toggler">
