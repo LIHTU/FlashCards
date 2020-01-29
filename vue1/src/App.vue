@@ -12,7 +12,6 @@ import CardsStudy from './components/CardsStudy.vue'
 export default {
   name: 'app',
   components: {
-    // HelloWorld,
     Nav,
     CardsStudy
   }
@@ -20,7 +19,7 @@ export default {
 </script>
 
 <style>
-  /* css vars */
+/* css vars */
 :root {
   --seaGreen: #44c87f;
   --appleRed: #c52607;

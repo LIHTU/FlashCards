@@ -135,7 +135,6 @@ export default {
       todos: this.$store.state.todos,
       message: this.$store.state.message,
       doneTodos: this.$store.getters.doneTodos,
-      cat: 'cat',
       view: "single",
       currentCardIndex: 0,
       showNewCardForm: false,
