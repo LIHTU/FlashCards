@@ -32,9 +32,6 @@ Vue.config.productionTip = false
 Vue.use(BootstrapVue);
 Vue.use(Vuex);
 
-
-import {mapState} from 'vuex';
-
 new Vue({
   el: '#app',
   store,
