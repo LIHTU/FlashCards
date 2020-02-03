@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import Vuex, { mapGetters } from 'vuex'
 import { store } from './store.js'
+// const fb = require('../firebaseConfig.js')
 
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -32,6 +33,7 @@ Vue.config.productionTip = false
 Vue.use(BootstrapVue);
 Vue.use(Vuex);
 
+
 new Vue({
   el: '#app',
   store,
@@ -41,5 +43,23 @@ new Vue({
   // ])
   // try to access done todo from here in the following syntax:
   // {doneTodos: $store.state.getters.doneTodos}  // also doesn't work to call 'doneTodos' in data of child component after setting this here.
-  render: h => h(App), 
+  render: h => h(App),
 });
+
+// // handle page reloads
+// let app
+// fb.auth.onAuthStateChanged(user => {
+//   if (!app) {
+//     app = new Vue({
+//       el: '#app',
+//       store,
+//       computed: {},
+//       // mapGetters([
+//       //   // 'gettersDoneTodos' // doesn't work.  Need to pass $store.getters.obj into component's data instead.
+//       // ])
+//       // try to access done todo from here in the following syntax:
+//       // {doneTodos: $store.state.getters.doneTodos}  // also doesn't work to call 'doneTodos' in data of child component after setting this here.
+//       render: h => h(App),
+//     });
+//   }
+// })
