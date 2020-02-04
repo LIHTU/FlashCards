@@ -88,7 +88,7 @@
         <div id="gridContainer" v-cloak v-if="view=='grid' && showNewCardForm==false" class="row">
           <div v-for="fCard in cards" v-bind:key="fCard.prompt" class="col-sm-12 col-md-6 col-xl-4">
             <div
-              v-on:click="fCard.revealed = !fCard.revealed"
+              v-on:click="flipCard(fCard)"
               v-bind:class="{'red-prompt': !fCard.revealed, 'apple-answer':fCard.revealed}"
               class="card f-card"
             >
@@ -104,7 +104,7 @@
         <div v-if="view=='single' && !showNewCardForm">
           <!-- todo: put card in directive or some re-usable html as view does it. -->
           <div
-            v-on:click="currentCard.revealed = !currentCard.revealed"
+            v-on:click="flipCard(currentCard)"
             v-bind:class="{'red-prompt': !currentCard.revealed, 'apple-answer':currentCard.revealed}"
             class="card f-card"
           >
@@ -163,7 +163,8 @@ export default {
           parentTags: ["js", "front-end"]
         }
       ],
-      cards: this.$store.state.cards
+      // cards: this.$store.state.cards,
+      cards: this.$store.state.firestoreCards
     };
   },
   computed: {
@@ -173,6 +174,10 @@ export default {
     currentSet: function() {return this.cards}
   },
   methods: {
+    flipCard: function(card) {
+      console.log(`flipping card ${card.prompt.slice(0,10)}, ${card.prompt}, ${card.revealed}`);
+      card.revealed = !card.revealed;
+    },
     createCard: function() {
       this.cards.push(this.newCard);
       this.newCard = {
