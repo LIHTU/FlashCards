@@ -132,9 +132,6 @@ export default {
   },
   data: function() {
     return {
-      todos: this.$store.state.todos,
-      message: this.$store.state.message,
-      doneTodos: this.$store.getters.doneTodos,
       view: "single",
       currentCardIndex: 0,
       showNewCardForm: false,
@@ -175,7 +172,6 @@ export default {
   },
   methods: {
     flipCard: function(card) {
-      console.log(`flipping card ${card.prompt.slice(0,10)}, ${card.prompt}, ${card.revealed}`);
       card.revealed = !card.revealed;
     },
     createCard: function() {
