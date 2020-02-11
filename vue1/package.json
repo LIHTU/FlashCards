@@ -20,6 +20,7 @@
     "popper.js": "^1.16.0",
     "portal-vue": "^2.1.7",
     "vue": "^2.6.10",
+    "vue-cli": "^2.9.6",
     "vuex": "^3.1.2"
   },
   "devDependencies": {

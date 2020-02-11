@@ -36,36 +36,39 @@ db.collection("cards").get().then(function(querySnapshot) {
   console.log(`Error getting documents: \n\t ${error}`);
 });
 
-export const store = new Vuex.Store({
-    state: {
-      message: "Keep Trying",
-      todos: [
-        { text: 'eat', done: true},
-        { text: 'sweep', done: false},
-        { text: 'comb hair', done: true},
-        { text: 'mop', done: false}
-      ],
-      firestoreCards: cardsCollection
-    },
-    mutations: {
-  
-    }, 
-    actions: {
-  
-    },
-    // getters will re-evaluate if the state they depend on changes.  This makes them reactive.
-    getters: {
-      doneTodos: state => {
-        return state.todos.filter(todo => todo.done);
-      }
-      // doneTodoCount: (state, getters) => {
-      //   return getters.doneTodos.lenght
-      // },
-      // getTodoById: (state) => (id) => {
-      //   return state.todos.find(todo => todo.id === id)
-      // },
-      // getCardByTag: (state) => (tag) => {
-      //   return state.cards.find(todo => todo.tags.includes(tag))
-      // }
-    }
-  });
+const state = {
+  message: "Keep Trying",
+  todos: [
+    { text: 'eat', done: true},
+    { text: 'sweep', done: false},
+    { text: 'comb hair', done: true},
+    { text: 'mop', done: false}
+  ],
+  cards: cardsCollection
+};
+
+const mutations = {};
+
+const actions = {};
+
+const getters = {
+  doneTodos(state) {
+    return state.todos.filter(todo => todo.done);
+  }
+  // doneTodoCount: (state, getters) => {
+  //   return getters.doneTodos.lenght
+  // },
+  // getTodoById: (state) => (id) => {
+  //   return state.todos.find(todo => todo.id === id)
+  // },
+  // getCardByTag: (state) => (tag) => {
+  //   return state.cards.find(todo => todo.tags.includes(tag))
+  // }
+};
+
+export default new Vuex.Store({
+  state,
+  mutations,
+  actions,
+  getters
+});
