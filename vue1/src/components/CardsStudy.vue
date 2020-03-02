@@ -160,30 +160,12 @@ export default {
           parentTags: ["js", "front-end"]
         }
       ]
-      // ,cards: this.$store.state.cards,
     };
   },
   computed: {
-    // cards() {
-    //   return this.$store.state.cards;  // Error in render: "TypeError: Cannot read property 'state' of undefined"
-    // },
-    // cards() {
-    //   return this.store.state.cards;  // Error in render: "TypeError: Cannot read property 'state' of undefined"
-    // },
-    // cards() {
-    //   return store.state.cards // "ReferenceError: store is not defined"
-    // },
-    // cards() {
-    //   return $store.state.cards // "ReferenceError: $store is not defined"
-    // },
-    // cards() {
-    //   return state.cards // "ReferenceError: state is not defined"
-    // },
-    cards: function() {
+    cards() {
       return this.$store.state.cards
-    }, // Uncaught TypeError: Cannot read property 'store' of undefined
-    // cards: this.$store.state.cards, // TypeError: Cannot read property '$store' of undefined
-    // cards: $store.state.cards,
+    },
     currentCard: function() {
       return this.cards[this.currentCardIndex];
     },
