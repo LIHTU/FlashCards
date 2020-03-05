@@ -61,7 +61,7 @@
               <div class="form-group">
                 <div class="label">Tags (Comma Separated):</div>
                 <!-- TODO: change to type ahead -->
-                <input v-model="newCard.tagsString" type="text" class="form-control" />
+                <input v-model="newCard.tags" type="text" class="form-control" />
               </div>
               <!-- <div class="form-group">
               <div class="label">This tag is a subcategory:</div>
@@ -76,7 +76,7 @@
           <div class="card-footer">
             <!-- TODO: SHOW DISABLED WHEN FORM SHOWN  -->
             <button
-              v-on:click="createCard();"
+              v-on:click="addCard();"
               type="button"
               class="btn btn-primary float-right"
             >Create</button>
@@ -139,7 +139,7 @@ export default {
       newCard: {
         prompt: "",
         answer: "",
-        tagsString: "",
+        tags: "",
         revealed: false
         // hasParent: "",
         // parentTags: ""
@@ -160,8 +160,7 @@ export default {
           parentTags: ["js", "front-end"]
         }
       ],
-      // cards: this.$store.state.cards,
-      cards: this.$store.state.firestoreCards
+      cards: this.$store.state.cards
     };
   },
   computed: {
@@ -174,12 +173,17 @@ export default {
     flipCard: function(card) {
       card.revealed = !card.revealed;
     },
-    createCard: function() {
-      this.cards.push(this.newCard);
+    addCard: function() {
+      this.$store.dispatch('addCard', this.newCard);
+
+      // shouldn't need to push locally as cards in this component are sourced from store.
+      // this.cards.push(this.newCard);
+
+      // reset card form
       this.newCard = {
         prompt: "",
         answer: "",
-        tagsString: "",
+        tags: "",
         revealed: false
         //  hasParent: "",
         //  parentTags: ""
