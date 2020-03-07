@@ -6,7 +6,10 @@ module.exports = {
         const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
         types.forEach(type => addStyleResource(config.module.rule('scss').oneOf(type)))
     },
-    lintOnSave: false
+    lintOnSave: false,
+    devServer: {
+        host: 'localhost'
+    }
 }
 
 function addStyleResource(rule)
