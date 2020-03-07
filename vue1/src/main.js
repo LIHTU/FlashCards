@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuex, { mapGetters } from 'vuex'
-import store  from './store.js'
+import {store}  from './store.js'
 // const fb = require('../firebaseConfig.js')
 
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
