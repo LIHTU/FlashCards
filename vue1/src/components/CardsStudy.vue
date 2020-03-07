@@ -169,7 +169,7 @@ export default {
       if (!this.cards) {return {}};
       return this.cards[this.currentCardIndex];
     },
-    currentSet: function() {return this.cards}
+    currentSet: function() { return this.cards }
   },
   methods: {
     flipCard: function(card) {

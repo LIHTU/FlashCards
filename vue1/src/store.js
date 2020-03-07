@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import 'firebase/firestore'
 
 const config = {
@@ -15,10 +15,7 @@ const config = {
 };
 firebase.initializeApp(config);
 
-
-
 Vue.use(Vuex);
-
 
 // firebase utils
 const db = firebase.firestore()
