@@ -164,7 +164,9 @@ export default {
     };
   },
   computed: {
-    currentCard: function() {
+    // this basically sets up watchers
+    currentCard: function() { 
+      if (!this.cards) {return {}};
       return this.cards[this.currentCardIndex];
     },
     currentSet: function() {return this.cards}
@@ -201,7 +203,6 @@ export default {
       } else {
         this.currentCardIndex++;
       }
-      this.currentCard = this.cards[this.currentCardIndex];
     },
     prevCard: function() {
       // handle going to begining of array from end.
@@ -210,7 +211,6 @@ export default {
       } else {
         this.currentCardIndex--;
       }
-      this.currentCard = this.cards[this.currentCardIndex];
     },
     shuffle: function(set) {
       if (set && set.length == 0) {

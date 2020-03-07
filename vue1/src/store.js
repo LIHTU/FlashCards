@@ -78,6 +78,7 @@ export const store = new Vuex.Store({
       db.collection("cards").add(Object.assign({}, card))
       .then(function (docRef)
       {
+        context.commit('addCard', card)
         console.log("Document written with ID: ", docRef.id, ' and prompt ');
       })
       .catch(function (error)
@@ -85,7 +86,7 @@ export const store = new Vuex.Store({
         console.error("Error adding document: ", error);
       });
 
-      context.commit('addCard')
+      
     }
   },
 
