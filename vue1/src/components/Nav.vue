@@ -15,13 +15,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Manage Sets</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#">css theme specimens</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="otherNav.html">Other Nav</a>
+          <a class="nav-link btn disabled" href="#">Manage Sets</a>
         </li>
       </ul>
     </div>

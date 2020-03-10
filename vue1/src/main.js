@@ -14,9 +14,6 @@ import './css/startbootstrap-freelancer/css/freelancer.min.css'
 // custom css
 import './css/styles.css';
 
-// import 'bootstrap'
-// import 'bootstrap/dist/css/bootstrap.min.css'
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -32,7 +29,6 @@ Vue.config.productionTip = false
 
 Vue.use(BootstrapVue);
 Vue.use(Vuex);
-
 
 new Vue({
   el: '#app',

@@ -4,16 +4,6 @@
 
       <div class="first-container">
 
-        <!-- vuex demos -->
-      
-        <!-- <div>{{message}} (if you see "keep trying" it means you're able to access store.state with out setting it in computed on app instantiation.  Why?  maybe adding it to app instantiation makes it reactive?)</div>
-        
-        <h3>Getters Done Todos: </h3> 
-        <div v-for="todo in doneTodos" v-bind:key="todo.text">
-          {{todo.text}}
-        </div> -->
-        <!-- end vuex demos -->
-
         <div class="button-container display-toggler">
           <button v-on:click="shuffle()" type="button" class="btn btn-secondary">
             <i class="fa fa-random"></i>
@@ -59,22 +49,13 @@
                 <textarea v-model="newCard.answer" class="form-control"></textarea>
               </div>
               <div class="form-group">
-                <div class="label">Tags (Comma Separated):</div>
+                <div class="label">Set Tags (Comma Separated):</div>
                 <!-- TODO: change to type ahead -->
                 <input v-model="newCard.tags" type="text" class="form-control" />
               </div>
-              <!-- <div class="form-group">
-              <div class="label">This tag is a subcategory:</div>
-              <input v-model="newHasParent" type="checkbox" class="form-control">
-            </div>
-            <div v-if="newHasParent" class="form-group">
-              <div class="label">Parent Tag:</div>
-              <input v-model="newParentTags" type="text" class="form-control">
-              </div>-->
             </form>
           </div>
           <div class="card-footer">
-            <!-- TODO: SHOW DISABLED WHEN FORM SHOWN  -->
             <button
               v-on:click="addCard();"
               type="button"
@@ -87,21 +68,51 @@
         <!-- Grid View -->
         <div id="gridContainer" v-cloak v-if="view=='grid' && showNewCardForm==false" class="row">
           <div v-for="fCard in cards" v-bind:key="fCard.prompt" class="col-sm-12 col-md-6 col-xl-4">
-            <div
-              v-on:click="flipCard(fCard)"
-              v-bind:class="{'red-prompt': !fCard.revealed, 'apple-answer':fCard.revealed}"
-              class="card f-card"
-            >
-              <div class="card-body card-content">
-                <p v-if="!fCard.revealed" v-html="fCard.prompt" class="prompt"></p>
-                <p v-else class="answer" v-html="fCard.answer"></p>
+            <div class="card f-card">
+              <div v-if="!fCard.editMode" class="card-body card-content red-prompt" @click="flipCard(fCard)" :class="{'apple-answer':fCard.revealed}">
+                <div>
+                  <p v-if="!fCard.revealed" v-html="fCard.prompt" class="prompt"></p>
+                  <p v-else class="answer" v-html="fCard.answer"></p>
+                  <button v-on:click="fCard.editMode = true" class="btn card-edit-btn pull-left"><i class="fa fa-pencil-alt"></i></button>
+                </div>
               </div>
+
+              <!-- edit form -->
+              <div v-else>
+                <div class="card-header">Edit Card</div>
+                <div class="card-body card-content">
+                  <form >
+                    <div class="form-group">
+                      <div class="label">Prompt:</div>
+                      <textarea v-model="fCard.prompt" class="form-control" rows="2" cols="60"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <div class="label">Answer:</div>
+                      <textarea v-model="fCard.answer" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <div class="label">Set Tags (Comma Separated):</div>
+                      <!-- TODO: change to type ahead -->
+                      <input v-model="fCard.tags" type="text" class="form-control" />
+                    </div>
+                  </form>
+                </div>
+                <div class="card-footer">
+                  <button
+                    v-on:click="updateCard(fCard);" type="button" class="btn btn-primary float-right">
+                    <i v-if="fCard.updating == false" class="fa fa-save"></i>
+                    <i v-else class="fa fa-spinner fa-pulse"></i>
+                  </button>
+                  <button v-on:click="deactivateEditMode(fCard)" v-on:click.stop="stopProp" type="button" class="btn btn-warning">Cancel</button>
+                </div>
+              </div>
+              
             </div>
           </div>
         </div>
 
         <!-- Single Card View -->
-        <div v-if="view=='single' && !showNewCardForm">
+        <div v-if="view=='single' && !showNewCardForm && currentCard">
           <!-- todo: put card in directive or some re-usable html as view does it. -->
           <div
             v-on:click="flipCard(currentCard)"
@@ -144,22 +155,6 @@ export default {
         // hasParent: "",
         // parentTags: ""
       },
-      // todo1: request card data from a js service that returns the array below.
-      // todo2: request card data from a server.
-      tags: [
-        {
-          name: "front-end",
-          parentTags: []
-        },
-        {
-          name: "js",
-          parentTags: ["front-end"]
-        },
-        {
-          name: "vue",
-          parentTags: ["js", "front-end"]
-        }
-      ],
       cards: this.$store.state.cards
     };
   },
@@ -173,13 +168,11 @@ export default {
   },
   methods: {
     flipCard: function(card) {
+      if(card.editMode) return;
       card.revealed = !card.revealed;
     },
     addCard: function() {
       this.$store.dispatch('addCard', this.newCard);
-
-      // shouldn't need to push locally as cards in this component are sourced from store.
-      // this.cards.push(this.newCard);
 
       // reset card form
       this.newCard = {
@@ -191,6 +184,15 @@ export default {
         //  parentTags: ""
       };
       this.showNewCardForm = false; // doesn't work :(
+    },
+    deactivateEditMode: card => {
+      card.editMode = false; 
+      card.revealed = false;
+    },
+    updateCard: function(card) {
+      // todo: figure out why dom isn't reaciting to .updating property
+      card.updating = true;
+      this.$store.dispatch('updateCard', card);
     },
     setView: function(newView) {
       this.view = newView;
@@ -233,6 +235,9 @@ export default {
     },
     promiseToSleep: function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    stopProp: event => {
+      event.stopPropagation();
     },
     sleep: async function(ms) {
       // console.log('Taking a break...');
@@ -287,6 +292,23 @@ pre {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+button.card-edit-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 46px;
+  height: 46px;
+  background-color: #eee;
+  color: #4b4b4b;
+  border-radius: 50%;
+}
+
+button.card-edit-btn:hover{
+  /* background-color: #dfdedf; */
+  color: #333;
+  box-shadow: 3px 3px 6px #ccc;
 }
 
 .red-prompt {

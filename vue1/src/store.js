@@ -25,31 +25,21 @@ const db = firebase.firestore()
 // firebase collections
 // const usersCollection = db.collection('users')
 var cardsCollection = [];
-db.collection("cards").get().then(function (querySnapshot)
-{
-  querySnapshot.forEach(doc =>
-  {
+db.collection("cards").get().then(function (querySnapshot) {
+  querySnapshot.forEach(doc => {
     var card = doc.data();
     card.revealed = false;
+    card.editMode = false;
+    card.updating = false;
+    card.docId = doc.id;
     cardsCollection.push(card);
   });
-}).catch(error =>
-{
+}).catch(error => {
   console.log(`Error getting documents: \n\t ${error}`);
 });
 
 export const store = new Vuex.Store({
-  // actions are accessed from components
-
-
   state: {
-    message: "Keep Trying",
-    todos: [
-      { text: 'eat', done: true },
-      { text: 'sweep', done: false },
-      { text: 'comb hair', done: true },
-      { text: 'mop', done: false }
-    ],
     cards: cardsCollection
   },
 
@@ -57,42 +47,52 @@ export const store = new Vuex.Store({
     addCard(state, card)
     {
       state.cards.push(Object.assign({}, card));
-      console.log('cards[-1]', state.cards[state.cards.length - 1]);
+    }, 
+    updateCard(state, card)
+    {
+      console.log('card', card.docId, "updated");
     }
   },
 
   actions: {
-    addCard(context, card)
-    {
-      console.log('typeof(card)', typeof(card));
-      // console.log('typeof(card.prompt)', typeof(card.prompt));
-      // {
-      //   prompt: card.prompt,
-      //   answer: card.answer,
-      //   tags: card.tags
-      // }
-      // Add a new document with a generated id.
+    addCard(context, card) {
       db.collection("cards").add(Object.assign({}, card))
+      .then(function (docRef){
+        context.commit('addCard', card)
+      })
+      .catch(function (error){
+        console.error("Error adding document: ", error);
+      });
+    },
+
+    updateCard(context, card) {
+      db.collection('cards').doc(card.docId).update({
+        answer: card.answer,
+        prompt: card.prompt,
+        tags: card.tags
+      })
       .then(function (docRef)
       {
-        context.commit('addCard', card)
-        console.log("Document written with ID: ", docRef.id, ' and prompt ');
+        context.commit('updateCard', card);
+        card.updating = false;
+        card.editMode = false;
       })
       .catch(function (error)
       {
         console.error("Error adding document: ", error);
-      });
-
-      
+        card.updating = false;
+      })
     }
   },
 
   // getters will re-evaluate if the state they depend on changes.  This makes them reactive.
   getters: {
-    doneTodos: state =>
-    {
-      return state.todos.filter(todo => todo.done)
-    }
+
+    // examples ⬇
+    // doneTodos: state =>
+    // {
+    //   return state.todos.filter(todo => todo.done)
+    // }
     // doneTodoCount: (state, getters) => {
     //   return getters.doneTodos.lenght
     // },
