@@ -79,6 +79,18 @@ pre {
     text-align: left;
 }
 
+span.action-danger {
+    color: red;
+    cursor: pointer;
+}
+span.action-default {
+    color: var(--seaGreen);
+    cursor: pointer;
+}
+span.action:hover {
+    text-shadow: 0 0 2px #DDD;
+}
+
 .prompt {
     font-weight: bold;
 }
@@ -99,7 +111,6 @@ pre {
     border: none;
     box-shadow: 3px 3px 3px var(--orangeCreamShadow);
 }
-
 
 /* Media Queries */
 /* smallest devices */

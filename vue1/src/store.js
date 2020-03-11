@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase';
 import 'firebase/firestore'
+import _ from 'lodash'
 
 const config = {
   apiKey: "AIzaSyBbDjN2mTPhwsjYBsjM8ok6XngNnAIM1QM",
@@ -31,6 +32,7 @@ db.collection("cards").get().then(function (querySnapshot) {
     card.revealed = false;
     card.editMode = false;
     card.updating = false;
+    card.deletePending = false;
     card.docId = doc.id;
     cardsCollection.push(card);
   });
@@ -38,19 +40,36 @@ db.collection("cards").get().then(function (querySnapshot) {
   console.log(`Error getting documents: \n\t ${error}`);
 });
 
+var initCard = function(card){
+  card.revealed = false;
+  card.editMode = false;
+  card.updating = false;
+  card.deletePending = false;
+  return card;
+}
+
 export const store = new Vuex.Store({
   state: {
     cards: cardsCollection
   },
 
   mutations: {
-    addCard(state, card)
-    {
+    addCard(state, card) {
+      console.log('card in mutation', card);
+      card = initCard(card);
       state.cards.push(Object.assign({}, card));
     }, 
-    updateCard(state, card)
-    {
+    updateCard(state, card) {
       console.log('card', card.docId, "updated");
+    },
+    deleteCard(state, card) {
+      // let cardObj = _.find(state.cards, {docId: card.docId}); 
+      // console.log('cardObj', cardObj);
+      let cardIndex = state.cards.findIndex(c => c.docId == card.docId);
+      // let cardIndex = state.cards.indexOf(card);
+      console.log('cardIndex', cardIndex);
+      console.log('card with prompt', state.cards[cardIndex].prompt.slice(0,20), "hs been deleted");
+      state.cards.splice(cardIndex, 1);
     }
   },
 
@@ -58,6 +77,7 @@ export const store = new Vuex.Store({
     addCard(context, card) {
       db.collection("cards").add(Object.assign({}, card))
       .then(function (docRef){
+        card.docId = docRef.id;
         context.commit('addCard', card)
       })
       .catch(function (error){
@@ -71,7 +91,7 @@ export const store = new Vuex.Store({
         prompt: card.prompt,
         tags: card.tags
       })
-      .then(function (docRef)
+      .then(function ()
       {
         context.commit('updateCard', card);
         card.updating = false;
@@ -82,6 +102,26 @@ export const store = new Vuex.Store({
         console.error("Error adding document: ", error);
         card.updating = false;
       })
+    },
+
+    deleteCard(context, card) {
+      console.log('card.docId', card.docId);
+      db.collection('cards').doc(card.docId).delete()
+      .then(function ()
+      {
+        context.commit('deleteCard', card);
+      })
+      .catch(function (error)
+      {
+        console.error("Error deleting document: ", error);
+      })
+      // async function fauxDelete(card) {
+      //   return card.prompt.slice(0,20) + "card has been fake deleted";
+      // }
+
+      // fauxDelete(card).then(function(msg){
+      //   console.log('msg:', msg);
+      // });
     }
   },
 

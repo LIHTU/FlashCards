@@ -33,6 +33,7 @@ Vue.use(Vuex);
 new Vue({
   el: '#app',
   store,
+  _,
   // mapGetters([
   //   // 'gettersDoneTodos' // doesn't work.  Need to pass $store.getters.obj into component's data instead.
   // ])

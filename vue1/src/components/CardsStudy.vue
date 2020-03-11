@@ -73,7 +73,12 @@
                 <div>
                   <p v-if="!fCard.revealed" v-html="fCard.prompt" class="prompt"></p>
                   <p v-else class="answer" v-html="fCard.answer"></p>
-                  <button v-on:click="fCard.editMode = true" class="btn card-edit-btn pull-left"><i class="fa fa-pencil-alt"></i></button>
+                  <button v-on:click="fCard.editMode=true" class="btn card-edit-btn pull-left"><i class="fa fa-pencil-alt"></i></button>
+                  <button v-on:click="fCard.deletePending=true" @click.stop="stopProp" class="btn card-delete-btn pull-left"><i class="fa fa-trash"></i></button>
+                  <p class="basebar-txt" v-if="fCard.deletePending">Delete Card?          
+                    <span @click="deleteCard(fCard)" v-on:click.stop="stopProp" class="action-danger action pl-3">Yes, Delete</span>
+                    <span @click="fCard.deletePending=false" @click.stop="stopProp" class="action-default action pl-3">No, Keep</span>
+                  </p>
                 </div>
               </div>
 
@@ -192,7 +197,10 @@ export default {
     updateCard: function(card) {
       // todo: figure out why dom isn't reaciting to .updating property
       card.updating = true;
-      this.$store.dispatch('updateCard', card);
+      this.$store.dispatch('updateCard', card)
+    },
+    deleteCard: function(card) {
+      this.$store.dispatch('deleteCard', card)
     },
     setView: function(newView) {
       this.view = newView;
@@ -303,12 +311,37 @@ button.card-edit-btn {
   background-color: #eee;
   color: #4b4b4b;
   border-radius: 50%;
+  box-shadow: 1px 1px 2px #ccc;
+}
+
+button.card-delete-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 60px;
+  width: 46px;
+  height: 46px;
+  background-color: #eee;
+  color: #4b4b4b;
+  border-radius: 50%;
+  box-shadow: 1px 1px 2px #ccc;
 }
 
 button.card-edit-btn:hover{
   /* background-color: #dfdedf; */
   color: #333;
-  box-shadow: 3px 3px 6px #ccc;
+  box-shadow: 2px 2px 4px #ccc;
+}
+
+button.card-delete-btn:hover{
+  /* background-color: #dfdedf; */
+  color: #333;
+  box-shadow: 2px 2px 4px #ccc;
+}
+
+.basebar-txt {
+  position: absolute;
+  bottom: 6px;
+  left: 120px;
 }
 
 .red-prompt {
