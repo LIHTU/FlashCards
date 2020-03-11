@@ -63,12 +63,8 @@ export const store = new Vuex.Store({
       console.log('card', card.docId, "updated");
     },
     deleteCard(state, card) {
-      // let cardObj = _.find(state.cards, {docId: card.docId}); 
-      // console.log('cardObj', cardObj);
       let cardIndex = state.cards.findIndex(c => c.docId == card.docId);
-      // let cardIndex = state.cards.indexOf(card);
-      console.log('cardIndex', cardIndex);
-      console.log('card with prompt', state.cards[cardIndex].prompt.slice(0,20), "hs been deleted");
+      console.log('card with prompt', state.cards[cardIndex].prompt.slice(0,20), "has been deleted");
       state.cards.splice(cardIndex, 1);
     }
   },

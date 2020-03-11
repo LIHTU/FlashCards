@@ -260,6 +260,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.card ul, .card ol {
+  text-align: left;
+}
+div#gridContainer div.card-content {
+  padding-bottom: 3rem;
+}
 pre {
   font-family: monospace;
   background-color: #444;
