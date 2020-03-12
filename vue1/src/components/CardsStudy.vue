@@ -1,15 +1,20 @@
 <template>
   <div>
+
     <GlobalEvents
       @keydown.left="prevCard()"
       @keydown.right="nextCard()"
       @keydown.up="flipCard(currentCard)"
       @keydown.down="flipCard(currentCard)"
+
+      @keydown.a="prevCard()"
+      @keydown.d="nextCard()"
+      @keydown.w="flipCard(currentCard)"
+      @keydown.s="flipCard(currentCard)"
     />
 
     <main>
       <div class="first-container">
-
         <div class="button-container display-toggler">
           <button v-on:click="shuffle()" type="button" class="btn btn-secondary">
             <i class="fa fa-random"></i>
