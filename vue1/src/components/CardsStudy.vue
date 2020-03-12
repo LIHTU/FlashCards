@@ -153,8 +153,6 @@
 </template>
 
 <script>
-
-
 export default {
   name: "CardsStudy",
   props: {

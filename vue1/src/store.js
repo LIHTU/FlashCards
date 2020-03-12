@@ -64,7 +64,6 @@ export const store = new Vuex.Store({
     },
     deleteCard(state, card) {
       let cardIndex = state.cards.findIndex(c => c.docId == card.docId);
-      console.log('card with prompt', state.cards[cardIndex].prompt.slice(0,20), "has been deleted");
       state.cards.splice(cardIndex, 1);
     }
   },
@@ -101,7 +100,6 @@ export const store = new Vuex.Store({
     },
 
     deleteCard(context, card) {
-      console.log('card.docId', card.docId);
       db.collection('cards').doc(card.docId).delete()
       .then(function ()
       {
@@ -111,13 +109,6 @@ export const store = new Vuex.Store({
       {
         console.error("Error deleting document: ", error);
       })
-      // async function fauxDelete(card) {
-      //   return card.prompt.slice(0,20) + "card has been fake deleted";
-      // }
-
-      // fauxDelete(card).then(function(msg){
-      //   console.log('msg:', msg);
-      // });
     }
   },
 
