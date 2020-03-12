@@ -1,7 +1,13 @@
 <template>
   <div>
-    <main>
+    <GlobalEvents
+      @keydown.left="prevCard()"
+      @keydown.right="nextCard()"
+      @keydown.up="flipCard(currentCard)"
+      @keydown.down="flipCard(currentCard)"
+    />
 
+    <main>
       <div class="first-container">
 
         <div class="button-container display-toggler">
@@ -67,6 +73,7 @@
 
         <!-- Grid View -->
         <div id="gridContainer" v-cloak v-if="view=='grid' && showNewCardForm==false" class="row">
+
           <div v-for="fCard in cards" v-bind:key="fCard.prompt" class="col-sm-12 col-md-6 col-xl-4">
             <div class="card f-card">
               <div v-if="!fCard.editMode" class="card-body card-content red-prompt" @click="flipCard(fCard)" :class="{'apple-answer':fCard.revealed}">
@@ -140,6 +147,7 @@
 </template>
 
 <script>
+
 
 export default {
   name: "CardsStudy",
