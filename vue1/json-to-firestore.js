@@ -4,7 +4,7 @@ require("firebase/firestore");
 
 // Initialize Cloud Firestore through Firebase
 firebase.initializeApp({
-    apiKey: "AIzaSyBbDjN2mTPhwsjYBsjM8ok6XngNnAIM1QM",
+    apiKey: "AIz...", // obfuscated
     authDomain: "flashcardslight.firebaseapp.com",
     projectId: "flashcardslight"
 });
@@ -23,7 +23,7 @@ cards.forEach(function (obj) {
     }).then(function (docRef) {
         console.log("Document written with ID: ", docRef.prompt.substring(0, 15));
     })
-        .catch(function (error) {
-            console.error("Error adding document: ", error);
-        });
+    .catch(function (error) {
+        console.error("Error adding document: ", error);
+    });
 });
