@@ -1,17 +1,7 @@
 <template>
   <div>
 
-    <GlobalEvents
-      @keydown.left="prevCard()"
-      @keydown.right="nextCard()"
-      @keydown.up="flipCard(currentCard)"
-      @keydown.down="flipCard(currentCard)"
 
-      @keydown.a="prevCard()"
-      @keydown.d="nextCard()"
-      @keydown.w="flipCard(currentCard)"
-      @keydown.s="flipCard(currentCard)"
-    />
 
     <main>
       <div class="first-container">
@@ -87,7 +77,7 @@
                   <p v-else class="answer" v-html="fCard.answer"></p>
                   <button v-on:click="fCard.editMode=true" class="btn card-edit-btn pull-left"><i class="fa fa-pencil-alt"></i></button>
                   <button v-on:click="fCard.deletePending=true" @click.stop="stopProp" class="btn card-delete-btn pull-left"><i class="fa fa-trash"></i></button>
-                  <p class="basebar-txt" v-if="fCard.deletePending">Delete Card?          
+                  <p class="basebar-txt" v-if="fCard.deletePending">Delete?          
                     <span @click="deleteCard(fCard)" v-on:click.stop="stopProp" class="action-danger action pl-3">Yes, Delete</span>
                     <span @click="fCard.deletePending=false" @click.stop="stopProp" class="action-default action pl-3">No, Keep</span>
                   </p>
@@ -130,6 +120,17 @@
 
         <!-- Single Card View -->
         <div v-if="view=='single' && !showNewCardForm && currentCard">
+          <GlobalEvents
+            @keydown.left="prevCard()"
+            @keydown.right="nextCard()"
+            @keydown.up="flipCard(currentCard)"
+            @keydown.down="flipCard(currentCard)"
+
+            @keydown.a="prevCard()"
+            @keydown.d="nextCard()"
+            @keydown.w="flipCard(currentCard)"
+            @keydown.s="flipCard(currentCard)"
+          />
           <!-- todo: put card in directive or some re-usable html as view does it. -->
           <div
             v-on:click="flipCard(currentCard)"
