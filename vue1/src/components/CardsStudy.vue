@@ -6,17 +6,22 @@
     <main>
       <div class="first-container">
         <div class="button-container display-toggler">
+          <!-- shuffle -->
           <button v-on:click="shuffle()" type="button" class="btn btn-secondary">
             <i class="fa fa-random"></i>
           </button>
+
+          <!-- new card button -->
           <button
-            v-on:click="showNewCardForm=true"
-            v-bind:disabled="showNewCardForm"
+            v-on:click="showNewCardForm()"
+            v-bind:disabled="newCardFormShown"
             type="button"
             class="btn btn-secondary"
           >
             <font-awesome-icon icon="plus-circle" />
           </button>
+
+          <!-- grid view -->
           <button
             v-show="view=='single'"
             v-on:click="setView('grid')"
@@ -25,6 +30,8 @@
           >
             <i class="fa fa-th-large"></i>
           </button>
+
+          <!-- single card view -->
           <button
             v-cloak
             v-show="view=='grid'"
@@ -37,13 +44,13 @@
         </div>
 
         <!-- New Card UI -->
-        <div v-cloak v-show="showNewCardForm" class="card f-card mt-0">
+        <div v-cloak v-show="newCardFormShown" class="card f-card mt-0">
           <div class="card-header">New Card</div>
           <div class="card-body card-content">
             <form>
-              <div class="form-group">
+              <div class="form-group" id="newCardForm">
                 <div class="label">Prompt:</div>
-                <textarea v-model="newCard.prompt" class="form-control" rows="2" cols="60"></textarea>
+                <textarea v-model="newCard.prompt" class="form-control prompt" rows="2" cols="60"></textarea>
               </div>
               <div class="form-group">
                 <div class="label">Answer:</div>
@@ -62,20 +69,22 @@
               type="button"
               class="btn btn-primary float-right"
             >Create</button>
-            <button v-on:click="showNewCardForm = false" type="button" class="btn btn-warning">Close</button>
+            <button v-on:click="newCardFormShown = false" type="button" class="btn btn-warning">Close</button>
           </div>
         </div>
 
         <!-- Grid View -->
-        <div id="gridContainer" v-cloak v-if="view=='grid' && showNewCardForm==false" class="row">
+        <div id="gridContainer" v-cloak v-if="view=='grid' && newCardFormShown==false" class="row">
 
           <div v-for="fCard in cards" v-bind:key="fCard.prompt" class="col-sm-12 col-md-6 col-xl-4">
-            <div class="card f-card">
+            <div :id="fCard.docId" class="card f-card">
               <div v-if="!fCard.editMode" class="card-body card-content red-prompt" @click="flipCard(fCard)" :class="{'apple-answer':fCard.revealed}">
                 <div>
                   <p v-if="!fCard.revealed" v-html="fCard.prompt" class="prompt"></p>
                   <p v-else class="answer" v-html="fCard.answer"></p>
-                  <button v-on:click="fCard.editMode=true" class="btn card-edit-btn pull-left"><i class="fa fa-pencil-alt"></i></button>
+                  <!-- edit button -->
+                  <button v-on:click="activateEditMode(fCard)" class="btn card-edit-btn pull-left"><i class="fa fa-pencil-alt"></i></button>
+                  <!-- delete button -->
                   <button v-on:click="fCard.deletePending=true" @click.stop="stopProp" class="btn card-delete-btn pull-left"><i class="fa fa-trash"></i></button>
                   <p class="basebar-txt" v-if="fCard.deletePending">Delete?          
                     <span @click="deleteCard(fCard)" v-on:click.stop="stopProp" class="action-danger action pl-3">Yes, Delete</span>
@@ -91,7 +100,7 @@
                   <form >
                     <div class="form-group">
                       <div class="label">Prompt:</div>
-                      <textarea v-model="fCard.prompt" class="form-control" rows="2" cols="60"></textarea>
+                      <textarea :id="fCard.docId+'Prompt'" v-model="fCard.prompt" class="form-control" rows="2" cols="60" tabindex="0"></textarea>
                     </div>
                     <div class="form-group">
                       <div class="label">Answer:</div>
@@ -110,7 +119,12 @@
                     <i v-if="fCard.updating == false" class="fa fa-save"></i>
                     <i v-else class="fa fa-spinner fa-pulse"></i>
                   </button>
-                  <button v-on:click="deactivateEditMode(fCard)" v-on:click.stop="stopProp" type="button" class="btn btn-warning">Cancel</button>
+                  <button 
+                    @click="deactivateEditMode(fCard)" 
+                    @click.stop="stopProp"
+                    type="button" 
+                    class="btn btn-warning">
+                    Cancel</button>
                 </div>
               </div>
               
@@ -119,7 +133,7 @@
         </div>
 
         <!-- Single Card View -->
-        <div v-if="view=='single' && !showNewCardForm && currentCard">
+        <div v-if="view=='single' && !newCardFormShown && currentCard">
           <GlobalEvents
             @keydown.left="prevCard()"
             @keydown.right="nextCard()"
@@ -153,6 +167,8 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: "CardsStudy",
   props: {
@@ -162,7 +178,7 @@ export default {
     return {
       view: "single",
       currentCardIndex: 0,
-      showNewCardForm: false,
+      newCardFormShown: false,
       // currentSet: this.$store.state.currentSet,
       newCard: {
         prompt: "",
@@ -200,7 +216,19 @@ export default {
         //  hasParent: "",
         //  parentTags: ""
       };
-      this.showNewCardForm = false; // doesn't work :(
+      this.newCardFormShown = false;
+    },
+    showNewCardForm: function() {
+      this.newCardFormShown=true;
+      Vue.nextTick(() => {
+        document.querySelector('#newCardForm textarea.prompt').focus();
+      })
+    },
+    activateEditMode: card => {
+      card.editMode = true;
+      Vue.nextTick(function(){
+        document.getElementById(card.docId + 'Prompt').focus();
+      })
     },
     deactivateEditMode: card => {
       card.editMode = false; 
