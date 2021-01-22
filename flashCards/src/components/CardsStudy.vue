@@ -44,7 +44,7 @@
         </div>
 
         <!-- New Card UI -->
-        <div v-cloak v-show="newCardFormShown" class="card f-card mt-0">
+        <div v-cloak v-show="newCardFormShown" class="card f-card mt-0 new-card">
           <div class="card-header">New Card</div>
           <div class="card-body card-content">
             <form>
@@ -69,7 +69,7 @@
               type="button"
               class="btn btn-primary float-right"
             >Create</button>
-            <button v-on:click="newCardFormShown = false" type="button" class="btn btn-warning">Close</button>
+            <button v-on:click="clearAndCloseNewCardForm()" type="button" class="btn btn-warning">Close</button>
           </div>
         </div>
 
@@ -135,15 +135,17 @@
         <!-- Single Card View -->
         <div v-if="view=='single' && !newCardFormShown && currentCard">
           <GlobalEvents
-            @keydown.left="prevCard()"
-            @keydown.right="nextCard()"
-            @keydown.up="flipCard(currentCard)"
-            @keydown.down="flipCard(currentCard)"
+            @keydown.left = "prevCard()"
+            @keydown.right = "nextCard()"
+            @keydown.up = "flipCard(currentCard)"
+            @keydown.down = "flipCard(currentCard)"
 
-            @keydown.a="prevCard()"
-            @keydown.d="nextCard()"
-            @keydown.w="flipCard(currentCard)"
-            @keydown.s="flipCard(currentCard)"
+            @keydown.a = "prevCard()"
+            @keydown.d = "nextCard()"
+            @keydown.w = "flipCard(currentCard)"
+            @keydown.s = "flipCard(currentCard)"
+            @keyup.n = "showNewCardForm()"
+            @keydown.esc = "clearAndCloseNewCardForm()"
           />
           <!-- todo: put card in directive or some re-usable html as view does it. -->
           <div
@@ -206,8 +208,10 @@ export default {
     },
     addCard: function() {
       this.$store.dispatch('addCard', this.newCard);
-
-      // reset card form
+      this.newCardFormShown = false;
+      this.resetNewCardForm();
+    },
+    resetNewCardForm: function() {
       this.newCard = {
         prompt: "",
         answer: "",
@@ -216,10 +220,13 @@ export default {
         //  hasParent: "",
         //  parentTags: ""
       };
+    },
+    clearAndCloseNewCardForm: function () {
       this.newCardFormShown = false;
+      this.resetNewCardForm();
     },
     showNewCardForm: function() {
-      this.newCardFormShown=true;
+      this.newCardFormShown = true;
       Vue.nextTick(() => {
         document.querySelector('#newCardForm textarea.prompt').focus();
       })
@@ -329,12 +336,15 @@ pre {
   margin: 0 3px;
 }
 .f-card {
-  /* width: 22rem; */
-  margin: 10px auto;
-  min-height: 250px;
-  max-width: 586px;
-  box-shadow: 2px 2px 3px #ccc;
-  transition: all 0.5;
+    /* width: 22rem; */
+    margin: 10px auto;
+    min-height: 250px;
+    max-width: 586px;
+    box-shadow: 3px 3px 3px var(--orangeCreamShadow);
+    transition: all .5;
+}
+div.new-card {
+  box-shadow: 0 0 41px #C7AE80, 3px 3px 3px var(--orangeCreamShadow);
 }
 .nextPrevRow {
   margin: 10px auto;

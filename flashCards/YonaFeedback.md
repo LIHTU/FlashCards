@@ -1,0 +1,17 @@
+Overall it looks and feels good. The code is pretty readable, but I have some suggestions for neatness and clarity:
+- Update project name, page title, README to reflect the name of your project: "Card Tree"
+- Remove old Vue starter app stuff, e.g. HelloWorld.vue
+- Maybe remove "Manage Sets" link since it doesn't do anything
+- Be consistent in using single vs double quotes
+- Clean up javascript -- remove commented-out code, that's what git is for
+- "stopProp" utility function should probly go away -- just call the method itself :)
+- use ES6-style javascript consistently:
+- () => {} instead of function() {}
+- const/let isntead of var
+- === instead of ==
+- CSS is a bit hard to read
+- Try using SMACSS or another similar CSS module convention
+- Maybe refactor a bit for clarity. The "row" class seems to be a grid, for example
+- Use SCSS or LESS and nest your classes well.
+- Maybe try using `display: grid` for your grid -- it's new and powerful and sexy
+- Bonus would be to use TypeScript :)
